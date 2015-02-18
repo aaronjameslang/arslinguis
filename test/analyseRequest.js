@@ -7,7 +7,8 @@ var fixtures = require('./analyseRequest.fixtures.js');
 
 describe('analyseRequest', function() {
 	fixtures.forEach(function(fixture, fixtureIndex) {
-		it('should correctly analyse fixture #' + fixtureIndex, function() {
+		if (!fixture.input.method) fixture.input.method = 'GET';
+		it('should correctly analyse ' + fixture.input.method + ' ' + fixture.input.url, function() {
 			var actualOutput = analyseRequest(fixture.input);
 			actualOutput.should.have.properties(fixture.output);
 		});
