@@ -1,0 +1,7 @@
+#! /bin/sh -eu
+
+node server.js &
+pid=$! ;
+#sleep 1 ; # let the server get initialised
+mocha --recursive -c | fix-dark-on-dark ;
+kill $pid ;
