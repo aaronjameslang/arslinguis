@@ -6,7 +6,7 @@
   "scripts": {
     "stop": "killall arslinguis",
     "test": "npm run install-local && mocha --recursive --colors | fix-dark-on-dark",
-    "install-local": "rsync ./ ./node_modules/arsl/ -a --exclude-from .gitignore"
+    "install-local": "rsync ./ ./node_modules/arsl/ --archive --delete --exclude-from .gitignore"
   },
   "author": "aaronjameslang@googlemail.com",
   "dependencies": {
