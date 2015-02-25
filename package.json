@@ -4,7 +4,8 @@
   "description": "The App for Your Language",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "npm run install-local && mocha --recursive --colors | fix-dark-on-dark",
+    "install-local": "rsync ./ ./node_modules/arsl/ -a --exclude-from .gitignore"
   },
   "author": "aaronjameslang@googlemail.com",
   "dependencies": {
@@ -23,6 +24,7 @@
     "chai-http": "^1.0.0",
     "chai-properties": "^1.2.0",
     "mocha": "^2.1.0",
+    "shelljs": "^0.3.0",
     "tar.gz": "^0.1.1",
     "watch": "^0.14.0"
   }
