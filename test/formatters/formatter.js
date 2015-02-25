@@ -8,7 +8,8 @@ var should = chai.should();
 var shell = require('shelljs');
 
 var analyseRequest = require('../../src/analyseRequest.js');
-var db = require('../../src/db.js');
+var getDb = require('../../src/db.js');
+
 var formatter = require('../../src/formatters/delegatingFormatter.js');
 
 var mimeTypes = {
@@ -42,11 +43,15 @@ function isFile(filePath) {
 
 function buildFixture(filePath) {
 	var fixture = {};
+	fixture.filePath = filePath;
+	fixture.dirPath = path.dirname(filePath);
 	fixture.fileName = path.basename(filePath);
-	fixture.fileText = fs.readFileSync(filePath);
-	fixture.fileType = path.basename(filePath).split('.').slice(1).join('.');
+	fixture.fileText = fs.readFileSync(filePath, {encoding: 'utf8'});
+	fixture.fileType = fixture.fileName.split('.').slice(1).join('.');
 	fixture.mimeType = mimeTypes[fixture.fileType];
-	fixture.url = '/' + path.relative(fixtureDir, filePath);
+	fixture.url = '/' + path.relative(fixtureDir, fixture.dirPath);
+	//fixture.url.length = fixture.url.length - (fixture.fileType.length + 1);
+	fixture.url += '/' + fixture.fileName.split('.')[0];
 	return fixture;
 }
 
@@ -61,17 +66,17 @@ function testFixture(fixture, fixtureIndex) {
 		canFormat = formatter.canFormat(fixture.mimeType);
 		expect(canFormat).to.be.true;
 	});
-	it('should correctly format ' + fixture.url, canFormat && function() {
-		return db.then(function(collection) {
+	it('should correctly format ' + fixture.url, function() {
+		return getDb().then(function(db) {
 			var criteria = analyseRequest({url:fixture.url}).criteria;
-			collection.findOne(criteria, function(error, document) {
-				if (error) {
-					done(error);
-				}
-				var actualOutput = formatter.format(fixture.mimeType, document);
-				var expectedOutput = fixture.fileText;
-				expect(expectedOutput).to.equal(actualOutput);
-			});
+			return db.findOne(criteria);
+		}).then(function(document) {
+			expect(document).to.be.an('object');
+			var actualOutput = formatter.format(fixture.mimeType, document);
+			var expectedOutput = fixture.fileText;
+			expect(actualOutput).to.be.a('string').and.not.to.equal('');
+			expect(expectedOutput).to.be.a('string').and.not.to.equal('');
+			expect(actualOutput).to.equal(expectedOutput);
 		});
 	});
 }

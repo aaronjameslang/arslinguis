@@ -7,5 +7,5 @@ exports.canFormat = function(mimeType) {
 };
 
 exports.format = function(mimeType, data) {
-	return JSON.stringify(data);
+	return JSON.stringify(data) + "\n";
 };
