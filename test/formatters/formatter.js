@@ -12,7 +12,13 @@ var db = require('../../src/db.js');
 var formatter = require('../../src/formatters/delegatingFormatter.js');
 
 var mimeTypes = {
-	'json': 'application/json'
+	'json': 'application/json',
+	'ld.json': 'application/ld+json',
+	'hal.json': 'application/hal+json',
+	'xml': 'application/xml',
+	'html': 'text/html',
+	'fragment.html': 'text/html;fragment',
+	'editform.fragment.html': 'text/html;editform;fragment'
 };
 
 var fileTypes = {
