@@ -7,7 +7,7 @@ exports.findFormatter = function(mimeType) {
 };
 
 exports.canFormat = function(mimeType) {
-	return this.findFormatter(mimeType);
+	return !!this.findFormatter(mimeType);
 };
 
 exports.format = function(mimeType, data) {
