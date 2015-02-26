@@ -8,7 +8,7 @@ var should = chai.should();
 var shell = require('shelljs');
 
 var analyseRequest = require('../../src/analyseRequest.js');
-var getDb = require('../../src/db.js');
+var db = require('../../src/db.js');
 
 var formatter = require('../../src/formatters/delegatingFormatter.js');
 
@@ -67,10 +67,9 @@ function testFixture(fixture, fixtureIndex) {
 		expect(canFormat).to.be.true;
 	});
 	it('should correctly format ' + fixture.url, function() {
-		return getDb().then(function(db) {
-			var criteria = analyseRequest({url:fixture.url}).criteria;
-			return db.findOne(criteria);
-		}).then(function(document) {
+		var criteria = analyseRequest({url:fixture.url}).criteria;
+		return db.findOne(criteria)
+		.then(function(document) {
 			expect(document).to.be.an('object');
 			var actualOutput = formatter.format(fixture.mimeType, document);
 			var expectedOutput = fixture.fileText;
