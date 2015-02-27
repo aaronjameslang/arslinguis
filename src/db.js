@@ -23,31 +23,43 @@ db.unwrap = function() {
 	return deferred.promise;
 };
 
-db.mongoify = function(criteria) {
-	if (!criteria || !criteria.id) {
-		return;
+db.clone = function(object) {
+	var clone = {};
+	for (var key in object) {
+		clone[key] = object[key];
 	}
-	criteria._id = criteria.id;
-	delete criteria.id;
+	return clone;
 };
 
-db.demongoify = function(document) {
-	if (document === null) {
-		return;
+db.mongoify = function(object) {
+	if (!object || !object.id) {
+		return object;
 	}
-	document.id = document._id;
-	delete document._id;
+
+	var clone = this.clone(object);
+	clone._id = object.id;
+	delete clone.id;
+	return clone;
+};
+
+db.demongoify = function(object) {
+	if (!object) {
+		return object;
+	}
+
+	object.id = object._id;
+	delete object._id;
+	return object;
 };
 
 db.findOne = function() {
 	var args = arguments;
-	this.mongoify(args[0]);
+	args[0] = this.mongoify(args[0]);
 	return this.unwrap()
 	.then(function(collection) {
 		return Q.npost(collection, 'findOne', args);
 	})
 	.then(function(document) {
-		this.demongoify(document);
-		return document;
+		return this.demongoify(document);
 	}.bind(this));
 };
