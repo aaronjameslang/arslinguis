@@ -3,7 +3,7 @@ var mongodb = require('mongodb');
 
 var db = exports;
 var deferred = Q.defer();
-var url = 'mongodb://localhost/arslinguis';
+var url = 'mongodb://127.0.0.1/arslinguis';
 
 mongodb.MongoClient.connect(url, function(error, database) {
 	if (error) {
