@@ -32,6 +32,9 @@ db.clone = function(object) {
 };
 
 db.mongoify = function(object) {
+	if (Array.isArray(object)) {
+		return object.map(this.mongoify.bind(this));
+	}
 	if (!object || !object.id) {
 		return object;
 	}
@@ -45,6 +48,9 @@ db.mongoify = function(object) {
 db.demongoify = function(object) {
 	if (!object) {
 		return object;
+	}
+	if (Array.isArray(object)) {
+		return object.map(this.demongoify.bind(this));
 	}
 
 	object.id = object._id;
@@ -62,4 +68,13 @@ db.findOne = function() {
 	.then(function(document) {
 		return this.demongoify(document);
 	}.bind(this));
+};
+
+db.insert = function() {
+	var args = arguments;
+	args[0] = this.mongoify(args[0]);
+	return this.unwrap()
+	.then(function(collection) {
+		return Q.npost(collection, 'insert', args);
+	});
 };

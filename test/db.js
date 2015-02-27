@@ -10,6 +10,7 @@ describe('Database', function() {
 		expect(db).to.be.an('object');
 		expect(db.unwrap).to.be.a('function');
 		expect(db.findOne).to.be.a('function');
+		expect(db.insert).to.be.a('function');
 	});
 	it('should connect succesfully', function() {
 		return db.unwrap().then(function(collection) {
