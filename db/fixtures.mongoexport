@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "54f4b06699cf196b73630b64" }, "request" : { "method" : "GET", "path" : "/users/edo", "headers" : { "accept" : "application/json" } }, "response" : { "headers" : { "content-type" : "application/json" }, "statusCode" : 200 } }
