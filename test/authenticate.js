@@ -24,26 +24,17 @@ var passwords = {
 };
 
 function Request() {}
-function Response() {}
-Response.prototype.end = function() {
-	error = this.statusCode + ': ' + this.stausMessage;
-};
-
-var error;
 
 describe('authenticate', function() {
 	var sessionId;
 	it('should be able to log in as Sam', function() {
 		var request = new Request();
-		var response = new Response();
 		var name = 'samantha.harrison';
 		var buffer = new Buffer(name + ':' + passwords[name]);
 		var authorization = 'Basic ' + buffer.toString('base64');
 		request.headers = {authorization: authorization};
-		return authenticate(request, response)
-		.then(function() {
-			expect(error).not.to.exist;
-			var session = request.session;
+		return authenticate(request)
+		.then(function(session) {
 			expect(session).to.be.an('object');
 			expect(session.type).to.equal('session');
 			expect(session.userId).to.equal('0Lwcs4fCTZyd3moCtA4evg');
@@ -54,12 +45,9 @@ describe('authenticate', function() {
 	});
 	it('should stay logged in as Sam', function() {
 		var request = new Request();
-		var response = new Response();
 		request.headers = {cookie: 'arslinguis-session-id='+sessionId};
-		return authenticate(request, response)
-		.then(function() {
-			expect(error).not.to.exist;
-			var session = request.session;
+		return authenticate(request)
+		.then(function(session) {
 			expect(session).to.be.an('object');
 			expect(session.type).to.equal('session');
 			expect(session.userId).to.equal('0Lwcs4fCTZyd3moCtA4evg');

@@ -3,19 +3,13 @@ var Q = require('q');
 
 var credentialCodec = require('arsl/src/credentialCodec.js');
 var db = require('arsl/src/db.js');
+var AuthenticationError = require('arsl/src/errors.js').AuthenticationError;
 var genId = require('arsl/src/genId.js');
 var getCookie = require('arsl/src/getCookie.js');
 
 var hash = Q.nbind(bcrypt.hash, bcrypt);
 var COOKIE_NAME = 'arslinguis-session-id';
 
-AuthenticationError = function() {
-	//Error.apply(this, arguments);
-	this.message = arguments[0];
-};
-AuthenticationError.prototype = Object.create(Error.prototype);
-AuthenticationError.prototype.constructor = AuthenticationError;
-AuthenticationError.prototype.name = 'AuthenticationError';
 
 module.exports = authenticate;
 
@@ -75,7 +69,7 @@ function authenticateCredential(actualCredential) {
 }
 
 
-function authenticateOrReject(request) {
+function authenticate(request) {
 	var sessionId = getCookie(request, COOKIE_NAME);
 	if (sessionId) {
 		return authenticateSession(sessionId);
@@ -88,20 +82,4 @@ function authenticateOrReject(request) {
 	}
 
 	return Q(null);
-}
-
-function authenticate(request, response) {
-	return authenticateOrReject(request)
-	.then(function(session) {
-		request.session = session;
-	})
-	.catch(function(error) {
-		if (error.constructor !== AuthenticationError) {
-			throw error;
-		}
-		console.log(error);
-		response.statusCode = 401;
-		response.statusMessage = error.message;
-		response.end();
-	});
 }
