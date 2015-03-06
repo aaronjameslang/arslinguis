@@ -5,9 +5,7 @@
   "main": "server.js",
   "scripts": {
     "stop": "killall arslinguis",
-    "test": "npm run install-local && mocha --recursive --colors | fix-dark-on-dark",
-    "install-local": "rsync ./ ./node_modules/arsl/ --archive --delete --exclude-from .gitignore",
-    "db-dump": "mongodump --db arslinguis --out db/mongodump & mongoexport --db arslinguis --collection main --out db/main.mongoexport & mongoexport --db arslinguis --collection fixtures --out db/fixtures.mongoexport & wait"
+    "test": "make test-units"
   },
   "author": "aaronjameslang@googlemail.com",
   "dependencies": {
