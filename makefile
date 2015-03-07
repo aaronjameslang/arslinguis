@@ -1,8 +1,8 @@
-test-unit: install
+test-unit:
 	mocha test/unit --recursive --colors | fix-dark-on-dark
 
-test-func: install db-restore
-	mocha test/func--recursive --colors | fix-dark-on-dark
+test-func:
+	mocha test/func --recursive --colors | fix-dark-on-dark
 
 db-dump:
 	mongodump --db arslinguis --out db/mongodump
