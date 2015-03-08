@@ -16,6 +16,16 @@ describe('Http Responses', function() {
 	});
 });
 
+function readWholeStream(readable, callback) {
+	var string = '';
+	readable.on('data', function(data) {
+		string += data.toString();
+	});
+	readable.on('error', callback);
+	readable.on('end', function() {
+		callback(null, string);
+	});
+}
 
 function testFixture(fixture) {
 	it('should correctly respond to ' + fixture.request.path, function(done) {
@@ -39,5 +49,16 @@ function testResponse(done, fixture, response) {
 			expect(actualValue).to.equal(expectedValue, message);
 		}
 	}
-	done();
+	if (!fixture.response._body) {
+		done();
+		return;
+	}
+	readWholeStream(response, function(error, actualBody) {
+		if (error) {
+			done(error);
+			return;
+		}
+		expect(actualBody).to.equal(fixture.response._body);
+		done();
+	});
 }
