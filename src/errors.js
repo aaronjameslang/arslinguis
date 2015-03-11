@@ -2,9 +2,7 @@ var db = require('arsl/src/db.js');
 
 exports.ArslinguisError = ArslinguisError;
 exports.AuthenticationError = AuthenticationError;
-exports.logToDatabase = logToDatabase;
-exports.logToResponse = logToResponse;
-exports.logToWritable = logToWritable;
+exports.ContentNegotiationError = ContentNegotiationError;
 
 function ArslinguisError() {
 	//Error.apply(this, arguments);
@@ -24,14 +22,10 @@ AuthenticationError.prototype.constructor = AuthenticationError;
 AuthenticationError.prototype.name = 'AuthenticationError';
 AuthenticationError.prototype.code = 401;
 
-function logToDatabase(error, db) {
-
+function ContentNegotiationError() {
+	ArslinguisError.apply(this, arguments);
 }
-
-function logToResponse(error, response) {
-
-}
-
-function logToWritable(error, writable) {
-	writable.write(error.toString() + '\n');
-}
+ContentNegotiationError.prototype = Object.create(ArslinguisError.prototype);
+ContentNegotiationError.prototype.constructor = ContentNegotiationError;
+ContentNegotiationError.prototype.name = 'ContentNegotiationError';
+ContentNegotiationError.prototype.code = 400; //TODO

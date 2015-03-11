@@ -1,11 +1,8 @@
-var _ = require('underscore');
-
 exports.mimeTypes = ['application/json'];
 
-exports.canFormat = function(mimeType) {
-	return _.contains(this.mimeTypes, mimeType);
-};
-
-exports.format = function(mimeType, data) {
-	return JSON.stringify(data) + "\n";
+exports.format = function(mimeType, data, writable) {
+	var json = JSON.stringify(data);
+	console.log('writing', json);
+	writable.write(JSON.stringify(data));
+	console.log('wrote');
 };

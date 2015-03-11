@@ -14,7 +14,7 @@ var mimeTypes = _.chain(formatters)
 
 function findFormatter(mimeType) {
 	return _.find(formatters, function(formatter) {
-		return formatter.canFormat(mimeType);
+		return _.contains(formatter.mimeTypes, mimeType);
 	});
 }
 
@@ -22,8 +22,11 @@ exports.canFormat = function(mimeType) {
 	return _.contains(mimeTypes, mimeType);
 };
 
-exports.format = function(mimeType, data) {
-	return this.findFormatter(mimeType).format(mimeType, data);
+exports.format = function(data, writable, mimeType) {
+	if (!mimeType) {
+		mimeType = writable.getHeader('content-type');
+	}
+	findFormatter(mimeType).format(mimeType, data, writable);
 };
 
 exports.negotiateContent = function(request, response) {
