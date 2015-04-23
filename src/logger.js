@@ -30,6 +30,6 @@ function respondWithError(error, response) {
 		response.statusCode = error.code;
 		respose.statusMessage = error.message;
 	}
-	response.write(code + ': ' + message);
+	response.write(response.statusCode + ': ' + response.statusMessage);
 	return Q.ninvoke(response, 'end');
 }
