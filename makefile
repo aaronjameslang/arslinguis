@@ -19,8 +19,13 @@ db-export:
 
 pre-commit: db-dump db-export
 
-package:
+package: build
 	mkdir -p target && cd target && npm pack ../
 
 install: package
 	npm install target/*.tgz
+
+compile-templates:
+	handlebars src/templates/* -f target/templates.js --map target/templates.js.map -c handlebars
+
+build: compile-templates

@@ -4,7 +4,8 @@ var errors = require('arsl/src/errors.js');
 var ContentNegotiationError = errors.ContentNegotiationError;
 
 var formatters = [
-	require('arsl/src/formatters/jsonFormatter.js')
+	require('arsl/src/formatters/jsonFormatter.js'),
+	require('arsl/src/formatters/htmlFormatter.js')
 ];
 
 var mimeTypes = _.chain(formatters)
