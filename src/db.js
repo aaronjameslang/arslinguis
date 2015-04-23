@@ -70,6 +70,21 @@ db.findOne = function() {
 	}.bind(this));
 };
 
+db.find = function() {
+	var args = arguments;
+	args[0] = this.mongoify(args[0]);
+	return this.unwrap()
+	.then(function(collection) {
+		return Q.npost(collection, 'find', args);
+	})
+	.then(function(cursor) {
+		return Q.npost(cursor, 'toArray');
+	})
+	.then(function(documents) {
+		return this.demongoify(documents);
+	}.bind(this));
+};
+
 db.insert = function() {
 	var args = arguments;
 	args[0] = this.mongoify(args[0]);
