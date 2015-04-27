@@ -1,31 +1,29 @@
+default: install test-unit
+
+build:
+	rm -rf target
+	mkdir target
+	cp -r src/main/* target/
+	handlebars src/main/templates/* -f target/templates.js --map target/templates.js.map -c handlebars
+
+package: build
+	npm pack target
+
+install: package
+	npm install *.tgz
+
 test-unit:
-	mocha test/unit --recursive --colors | fix-dark-on-dark
+	mocha src/test/unit --recursive --colors | fix-dark-on-dark
 
 test-func:
-	mocha test/func --recursive --colors | fix-dark-on-dark
+	mocha src/test/func --recursive --colors | fix-dark-on-dark
 
-db-dump:
-	mongodump --db arslinguis --out db/mongodump
-
-db-restore:
-	mongorestore db/mongodump --drop
+clean:
+	rm -rf target *.tgz node_modules
 
 db-export:
 	mongoexport --db arslinguis --collection \
-		main --out db/main.mongoexport &
+		main --out src/test/db/main.mongoexport &
 	mongoexport --db arslinguis --collection \
-		fixtures --out db/fixtures.mongoexport &
+		fixtures --out src/test/db/fixtures.mongoexport &
 	wait
-
-pre-commit: db-dump db-export
-
-package: build
-	mkdir -p target && cd target && npm pack ../
-
-install: package
-	npm install target/*.tgz
-
-compile-templates:
-	handlebars src/templates/* -f target/templates.js --map target/templates.js.map -c handlebars
-
-build: compile-templates

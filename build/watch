@@ -1,7 +1,0 @@
-#! /bin/sh -eu
-while true
-do
-	date ;
-	./build/start-test-stop ;
-	inotifywait -r . ;
-done
