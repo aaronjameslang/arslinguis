@@ -2,7 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var http = require('http');
 
-var authenticate = require('arsl/src/authenticate.js');
+var authenticate = require('arsl/authenticate.js');
 
 var passwords = {
 	"christophe.grandsire-koevoets":

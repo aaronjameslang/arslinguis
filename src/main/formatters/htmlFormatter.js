@@ -1,6 +1,6 @@
 var Handlebars = require('handlebars');
 
-require('arsl/src/templates.js');
+require('arsl/templates.js');
 
 exports.mimeTypes = ['text/html'];
 

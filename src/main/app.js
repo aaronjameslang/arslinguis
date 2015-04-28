@@ -2,13 +2,13 @@ var fs = require('fs');
 var http = require('http');
 var Q = require('q');
 
-var authenticate = require('arsl/src/authenticate.js');
+var authenticate = require('arsl/authenticate.js');
 var config = require('arsl/config.js');
-var db = require('arsl/src/db.js');
-var errors = require('arsl/src/errors.js');
-var formatter = require('arsl/src/formatter.js');
-var getCriteria = require('arsl/src/getCriteria.js');
-var logger = require('arsl/src/logger.js');
+var db = require('arsl/db.js');
+var errors = require('arsl/errors.js');
+var formatter = require('arsl/formatter.js');
+var getCriteria = require('arsl/getCriteria.js');
+var logger = require('arsl/logger.js');
 
 process.title = 'arslinguis';
 

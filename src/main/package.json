@@ -4,8 +4,8 @@
   "description": "The App for Your Language",
   "main": "server.js",
   "scripts": {
-    "stop": "killall arslinguis",
-    "test": "make test-units"
+    "start": "node app.js",
+    "stop": "killall arslinguis"
   },
   "author": "aaronjameslang@googlemail.com",
   "dependencies": {

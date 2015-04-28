@@ -6,7 +6,7 @@ var db;
 
 describe('Database', function() {
 	it('should initialise without errors', function() {
-		db = require('arsl/src/db.js');
+		db = require('arsl/db.js');
 		expect(db).to.be.an('object');
 		expect(db.unwrap).to.be.a('function');
 		expect(db.findOne).to.be.a('function');

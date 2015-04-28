@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var getCookie = require('arsl/src/getCookie.js');
+var getCookie = require('arsl/getCookie.js');
 
 var fixtures = {
 	'a=b;c=d': {

@@ -1,6 +1,6 @@
 var liburl = require('url');
 
-var libstr = require('arsl/src/libstr.js');
+var libstr = require('arsl/libstr.js');
 
 module.exports = getCriteria;
 

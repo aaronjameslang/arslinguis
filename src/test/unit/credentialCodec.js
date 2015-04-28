@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var credentialCodec = require('arsl/src/credentialCodec.js');
+var credentialCodec = require('arsl/credentialCodec.js');
 
 var fixtures = {
 	"username:password" : {

@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var should = require('chai').should();
 
-var libstr = require('arsl/src/libstr.js');
+var libstr = require('arsl/libstr.js');
 var fixtures = require('./libstr.fixtures.js');
 
 describe('stringAspects', function() {

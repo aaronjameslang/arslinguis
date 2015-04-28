@@ -2,7 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 chai.use(require('chai-properties'));
 
-var getCriteria = require('arsl/src/getCriteria.js');
+var getCriteria = require('arsl/getCriteria.js');
 expect(getCriteria).to.be.a('function');
 var fixtures = require('./getCriteria.fixtures.js');
 

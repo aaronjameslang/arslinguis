@@ -2,7 +2,7 @@ var _ = require('underscore');
 var pmongo = require('promised-mongo');
 
 var db = pmongo('mongodb://127.0.0.1/arslinguis');
-var errors = require('arsl/src/errors.js');
+var errors = require('arsl/errors.js');
 var ArslinguisError = errors.ArslinguisError;
 
 exports.logError = logError;

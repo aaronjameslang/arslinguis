@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var genId = require('arsl/src/genId.js');
+var genId = require('arsl/genId.js');
 
 var ids = [];
 

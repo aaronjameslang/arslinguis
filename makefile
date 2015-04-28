@@ -10,7 +10,7 @@ package: build
 	npm pack target
 
 install: package
-	npm install *.tgz
+	npm --python=python2 install *.tgz
 
 test-unit:
 	mocha src/test/unit --recursive --colors | fix-dark-on-dark
