@@ -2,11 +2,7 @@
   "name": "arsl",
   "version": "0.0.0",
   "description": "The App for Your Language",
-  "main": "server.js",
-  "scripts": {
-    "start": "node app.js",
-    "stop": "killall arslinguis"
-  },
+  "bin": "./app.js",
   "author": "aaronjameslang@googlemail.com",
   "dependencies": {
     "bcrypt": "^0.8.1",
