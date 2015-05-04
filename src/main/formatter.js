@@ -1,39 +1,41 @@
 var _ = require('underscore');
+var Negotiator = require('negotiator');
 
 var errors = require('arsl/errors.js');
 var ContentNegotiationError = errors.ContentNegotiationError;
 
-var formatters = [
-	require('arsl/formatters/jsonFormatter.js'),
-	require('arsl/formatters/htmlFormatter.js')
-];
+var formats = {
+	'text/html': format_html,
+	'application/json': format_json,
+	'application/xml': format_xml
+};
 
-var mimeTypes = _.chain(formatters)
-	.pluck('mimeTypes')
-	.flatten()
-	.value();
+var mimeTypes = Object.keys(formats);
 
-function findFormatter(mimeType) {
-	return _.find(formatters, function(formatter) {
-		return _.contains(formatter.mimeTypes, mimeType);
-	});
+exports.format = function(request, response, data) {
+	var mimeType = new Negotiator(request).mediaType(mimeTypes) ||
+		mimeTypes[0];
+	response.setHeader('content-type', mimeType);
+	var format = formats[mimeType];
+	format(request, response, data);
+};
+
+function format_html(request, response, data) {
+	var Handlebars = require('handlebars');
+	require('arsl/templates.js');
+	require('arsl/templateHelpers.js');
+	Handlebars.partials = Handlebars.templates;
+
+	var string = Handlebars.templates.htmlDoc(data);
+	response.write(string);
 }
 
-exports.canFormat = function(mimeType) {
-	return _.contains(mimeTypes, mimeType);
-};
+function format_json(request, response, data) {
+	var json = JSON.stringify(data);
+	response.write(json);
+}
 
-exports.format = function(data, writable, mimeType) {
-	if (!mimeType) {
-		mimeType = writable.getHeader('content-type');
-	}
-	findFormatter(mimeType).format(mimeType, data, writable);
-};
-
-exports.negotiateContent = function(request, response) {
-	var mimeType = request.headers.accept;
-	if (!this.canFormat(mimeType)) {
-		throw new ContentNegotiationError(mimeType);
-	}
-	response.setHeader('content-type', mimeType);
-};
+function format_xml(request, response, data) {
+	var json = JSON.stringify(data);
+	response.write(json);
+}

@@ -23,9 +23,6 @@ var server = http.createServer(function(request, response) {
 		logger.logRequest(request);
 	})
 	.then(function() {
-		return formatter.negotiateContent(request, response);
-	})
-	.then(function() {
 		return authenticate(request);
 	})
 	.then(function(session_) {
@@ -35,7 +32,7 @@ var server = http.createServer(function(request, response) {
 		return db[methodName](criteria);
 	})
 	.then(function(data) {
-		formatter.format(data, response);
+		formatter.format(request, response, data);
 	})
 	.catch(function(error) {
 		return Q.all(
