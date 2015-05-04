@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var pmongo = require('promised-mongo');
+var Q = require('q');
 
 var db = pmongo('mongodb://127.0.0.1/arslinguis');
 var errors = require('arsl/errors.js');
