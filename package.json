@@ -1,8 +1,8 @@
 {
-  "name": "arsl",
+  "name": "arslinguis",
   "version": "0.0.0",
   "description": "The App for Your Language",
-  "bin": "./app.js",
+  "bin": "./server.js",
   "author": "aaronjameslang@googlemail.com",
   "dependencies": {
     "bcrypt": "^0.8.1",

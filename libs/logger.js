@@ -3,7 +3,7 @@ var pmongo = require('promised-mongo');
 var Q = require('q');
 
 var db = pmongo('mongodb://127.0.0.1/arslinguis');
-var errors = require('arsl/errors.js');
+var errors = require('./errors.js');
 var ArslinguisError = errors.ArslinguisError;
 
 exports.logError = logError;

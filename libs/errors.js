@@ -1,4 +1,4 @@
-var db = require('arsl/db.js');
+var db = require('./db.js');
 
 exports.ArslinguisError = ArslinguisError;
 exports.AuthenticationError = AuthenticationError;

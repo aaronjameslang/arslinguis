@@ -1,11 +1,11 @@
 var bcrypt = require('bcrypt');
 var Q = require('q');
 
-var credentialCodec = require('arsl/credentialCodec.js');
-var db = require('arsl/db.js');
-var AuthenticationError = require('arsl/errors.js').AuthenticationError;
-var genId = require('arsl/genId.js');
-var getCookie = require('arsl/getCookie.js');
+var credentialCodec = require('./credentialCodec.js');
+var db = require('./db.js');
+var AuthenticationError = require('./errors.js').AuthenticationError;
+var genId = require('./genId.js');
+var getCookie = require('./getCookie.js');
 
 var hash = Q.nbind(bcrypt.hash, bcrypt);
 var COOKIE_NAME = 'arslinguis-session-id';
