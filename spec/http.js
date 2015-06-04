@@ -4,7 +4,7 @@ var expect = chai.expect;
 var fs = require('fs');
 var http = require('http');
 
-var fixturesFile = require.resolve('../db/fixtures.mongoexport');
+var fixturesFile = './spec/fixtures.mongoexport';
 var lines = fs.readFileSync(fixturesFile, {'encoding':'utf8'}).split('\n');
 
 describe('Http Responses', function() {
