@@ -40,7 +40,12 @@ import-test-data:
 
 tap:
 	mkdir -p target
-	mocha tests/unit --recursive --reporter=tap > target/test.tap
+	mocha tests/unit --recursive --reporter=tap > target/unit.tap
+	npm start &
+	sleep 1
+	make import-test-data
+	mocha tests/func --recursive --reporter=tap > target/func.tap
+	npm stop
 
 clover:
 	mkdir -p target/coverage
