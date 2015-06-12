@@ -4,13 +4,10 @@ var expect = chai.expect;
 var fs = require('fs');
 var http = require('http');
 
-var fixturesFile = './spec/fixtures.mongoexport';
-var lines = fs.readFileSync(fixturesFile, {'encoding':'utf8'}).split('\n');
+var fixtures = require('./httpFixtures.js');
 
 describe('Http Responses', function() {
-	lines.forEach(function(line) {
-		if (!line) return;
-		var fixture = JSON.parse(line);
+	fixtures.forEach(function(fixture) {
 		fixture.request.port = 8888;
 		testFixture(fixture);
 	});

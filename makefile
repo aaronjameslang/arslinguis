@@ -24,6 +24,7 @@ test:
 	mocha test --recursive --colors | fix-dark-on-dark
 
 spec:
+	make import-test-data
 	mocha spec --recursive --colors | fix-dark-on-dark
 
 export-test-data:
