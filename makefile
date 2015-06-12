@@ -14,11 +14,11 @@ compile-templates:
 lint: jshint
 
 jshint:
-	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish **/*.js | fix-dark-on-dark || test $$? = 2
+	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish . | fix-dark-on-dark || test $$? = 2
 
 checkstyle:
 	mkdir -p target
-	jshint --exclude-path=.gitignore --reporter=checkstyle **/*.js > target/lint.checkstyle || test $$? = 2
+	jshint --exclude-path=.gitignore --reporter=checkstyle . > target/lint.checkstyle || test $$? = 2
 
 test-unit:
 	mocha tests/unit --recursive --colors | fix-dark-on-dark
@@ -40,13 +40,13 @@ import-test-data:
 
 tap:
 	mkdir -p target
-	mocha test --recursive --reporter=tap > target/test.tap
+	mocha tests/unit --recursive --reporter=tap > target/test.tap
 
 clover:
 	mkdir -p target/coverage
 	ln -s target/coverage coverage
 
-	istanbul cover _mocha test -- --recursive --reporter=tap > target/test.tap
+	istanbul cover _mocha tests/unit -- --recursive --reporter=tap > target/test.tap
 	istanbul report clover
 
 	rm coverage
