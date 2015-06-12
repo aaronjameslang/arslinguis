@@ -14,9 +14,14 @@ checkstyle: target
 tap: target
 	mocha test --recursive --reporter=tap > target/test.tap
 
-cover: target
-	istanbul cover "_mocha test --recursive --reporter=tap > test.tap"
+clover: target
+	mkdir target/coverage
+	ln -s target/coverage coverage
+
+	istanbul cover _mocha test -- --recursive --reporter=tap > target/test.tap
 	istanbul report clover
+
+	rm coverage
 
 target:
 	mkdir target
