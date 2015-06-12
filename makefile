@@ -1,33 +1,24 @@
 default: install test lint
 
+install:
+	npm install
+	make compile-templates
+
 compile-templates:
-	handlebars libs/templates/* -f libs/templates/templates.js --map libs/templates/templates.js.map -c handlebars
+	mkdir -p target
+	handlebars libs/templates/* \
+		-f target/templates.js \
+		--map target/templates.js.map \
+		-c handlebars
 
 lint: jshint
 
 jshint:
 	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish **/*.js | fix-dark-on-dark || test $$? = 2
 
-checkstyle: target
+checkstyle:
+	mkdir -p target
 	jshint --exclude-path=.gitignore --reporter=checkstyle **/*.js > target/lint.checkstyle || test $$? = 2
-
-tap: target
-	mocha test --recursive --reporter=tap > target/test.tap
-
-clover: target
-	mkdir target/coverage
-	ln -s target/coverage coverage
-
-	istanbul cover _mocha test -- --recursive --reporter=tap > target/test.tap
-	istanbul report clover
-
-	rm coverage
-
-target:
-	mkdir target
-
-install:
-	npm install
 
 test:
 	mocha test --recursive --colors | fix-dark-on-dark
@@ -35,11 +26,25 @@ test:
 spec:
 	mocha spec --recursive --colors | fix-dark-on-dark
 
-db-export:
-	mongoexport --db arslinguis --collection \
-		main --out src/test/db/main.mongoexport &
-	mongoexport --db arslinguis --collection \
-		fixtures --out src/test/db/fixtures.mongoexport &
-	wait
+export-test-data:
+	mongoexport --db arslinguis --collection main \
+		--out  spec/test-data.mongoexport
+
+import-test-data:
+	mongoimport --db arslinguis --collection main \
+		--drop spec/test-data.mongoexport
+
+tap:
+	mkdir -p target
+	mocha test --recursive --reporter=tap > target/test.tap
+
+clover:
+	mkdir -p target/coverage
+	ln -s target/coverage coverage
+
+	istanbul cover _mocha test -- --recursive --reporter=tap > target/test.tap
+	istanbul report clover
+
+	rm coverage
 
 .PHONY: test spec
