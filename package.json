@@ -24,6 +24,7 @@
     "chai-http": "^1.0.0",
     "chai-properties": "^1.2.0",
     "istanbul": "^0.3.15",
+    "jshint": "^2.8.0",
     "mocha": "^2.2.5",
     "shelljs": "^0.3.0",
     "tar.gz": "^0.1.1",
