@@ -7,10 +7,10 @@ var fixtures = require('./libstr.fixtures.js');
 describe('stringAspects', function() {
 	_.each(fixtures, function(plural, singular) {
 		it('should know "' + plural + '" is plural', function() {
-			libstr.isPlural(plural).should.be.true;
+			libstr.isPlural(plural).should.equal(true);
 		});
 		it('should know "' + singular + '" is singular', function() {
-			libstr.isPlural(singular).should.be.false;
+			libstr.isPlural(singular).should.equal(false);
 		});
 		it('should know the singular of "' + plural + '" is "' + singular + '"', function() {
 			libstr.toSingular(plural).should.equal(singular);

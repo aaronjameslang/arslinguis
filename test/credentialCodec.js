@@ -28,17 +28,25 @@ var fixtures = {
 	}
 };
 
+function testDecode(b64, credential) {
+	var actualCredential = credentialCodec.decode(b64);
+	expect(actualCredential).to.have.properties(credential);
+}
+
+function testEncode(b64, credential) {
+	var actualB64 = credentialCodec.encode(credential);
+	expect(actualB64).to.equal(b64);
+}
+
 describe('credentialCodec', function() {
 	for (var plain in fixtures) {
 		var b64 = new Buffer(plain).toString('base64');
 		var credential = fixtures[plain];
-		it('should be able to decode ' + plain, function() {
-			var actualCredential = credentialCodec.decode(b64);
-			expect(actualCredential).to.have.properties(credential);
-		});
 		it('should be able to encode ' + plain, function() {
 			var actualB64 = credentialCodec.encode(credential);
 			expect(actualB64).to.equal(b64);
 		});
+		it('should be able to decode ' + plain, testDecode.bind(null, b64, credential));
+		//it('should be able to encode ' + plain, testEncode.bind(null, b64, credential));
 	}
 });
