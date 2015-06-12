@@ -1,14 +1,14 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var genId = require('arsl/genId.js');
+var genId = require('../libs/genId.js');
 
 var ids = [];
 
 function testId(id) {
 	describe('id: ' + id, function() {
-		it('should be 22 chars long', function() {
-			expect(id).to.have.length(22);
+		it('should be 36 chars long', function() {
+			expect(id).to.have.length(36);
 		});
 		it('should should be unique', function() {
 			var index = ids.indexOf(id);

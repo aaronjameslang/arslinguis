@@ -2,7 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var http = require('http');
 
-var authenticate = require('arsl/authenticate.js');
+var authenticate = require('../libs/authenticate.js');
 
 var passwords = {
 	"christophe.grandsire-koevoets":
@@ -37,9 +37,9 @@ describe('authenticate', function() {
 		.then(function(session) {
 			expect(session).to.be.an('object');
 			expect(session.type).to.equal('session');
-			expect(session.userId).to.equal('0Lwcs4fCTZyd3moCtA4evg');
+			expect(session.userId).to.equal('d0bc1cb3-87c2-4d9c-9dde-6a02b40e1ebe');
 			expect(session.id).to.be.a('string');
-			expect(session.id).to.have.length(22);
+			expect(session.id).to.have.length(36);
 			sessionId = session.id;
 		});
 	});
@@ -50,7 +50,7 @@ describe('authenticate', function() {
 		.then(function(session) {
 			expect(session).to.be.an('object');
 			expect(session.type).to.equal('session');
-			expect(session.userId).to.equal('0Lwcs4fCTZyd3moCtA4evg');
+			expect(session.userId).to.equal('d0bc1cb3-87c2-4d9c-9dde-6a02b40e1ebe');
 			expect(session.id).to.equal(sessionId);
 		});
 	});
