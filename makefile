@@ -1,22 +1,34 @@
-default: install test-unit
+default: install test lint
 
 compile-templates:
 	handlebars libs/templates/* -f libs/templates/templates.js --map libs/templates/templates.js.map -c handlebars
 
-#package: build
-	#npm pack target
+lint: jshint
 
-#install: package
-	#npm --python=python2 install *.tgz
+jshint:
+	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish **/*.js | fix-dark-on-dark
+
+checkstyle: target
+	jshint --exclude-path=.gitignore --reporter=checkstyle **/*.js > target/lint.checkstyle
+
+tap: target
+	mocha test --recursive --reporter=tap > target/test.tap
+
+cover: target
+	istanbul cover "_mocha test --recursive --reporter=tap > test.tap"
+	istanbul report clover
+
+target:
+	mkdir target
+
+install:
+	npm install
 
 test:
 	mocha test --recursive --colors | fix-dark-on-dark
 
 spec:
 	mocha spec --recursive --colors | fix-dark-on-dark
-
-#clean:
-	#rm -rf target *.tgz node_modules
 
 db-export:
 	mongoexport --db arslinguis --collection \
