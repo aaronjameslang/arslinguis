@@ -6,10 +6,10 @@ compile-templates:
 lint: jshint
 
 jshint:
-	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish **/*.js | fix-dark-on-dark
+	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish **/*.js | fix-dark-on-dark || test $$? = 2
 
 checkstyle: target
-	jshint --exclude-path=.gitignore --reporter=checkstyle **/*.js > target/lint.checkstyle
+	jshint --exclude-path=.gitignore --reporter=checkstyle **/*.js > target/lint.checkstyle || test $$? = 2
 
 tap: target
 	mocha test --recursive --reporter=tap > target/test.tap
