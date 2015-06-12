@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var getCookie = require('../libs/getCookie.js');
+var getCookie = require('../../libs/getCookie.js');
 
 var fixtures = {
 	'a=b;c=d': {

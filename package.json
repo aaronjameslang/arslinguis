@@ -4,6 +4,9 @@
   "description": "The App for Your Language",
   "bin": "./server.js",
   "author": "aaronjameslang@googlemail.com",
+  "scripts": {
+    "stop": "kill $(cat pid) || killall arslinguis"
+  },
   "dependencies": {
     "bcrypt": "^0.8.1",
     "express": "^4.12.2",

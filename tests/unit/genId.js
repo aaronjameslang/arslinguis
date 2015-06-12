@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var genId = require('../libs/genId.js');
+var genId = require('../../libs/genId.js');
 
 var ids = [];
 

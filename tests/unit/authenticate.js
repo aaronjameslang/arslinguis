@@ -2,7 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var http = require('http');
 
-var authenticate = require('../libs/authenticate.js');
+var authenticate = require('../../libs/authenticate.js');
 
 var passwords = {
 	"christophe.grandsire-koevoets":

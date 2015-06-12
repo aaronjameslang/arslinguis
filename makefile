@@ -20,20 +20,23 @@ checkstyle:
 	mkdir -p target
 	jshint --exclude-path=.gitignore --reporter=checkstyle **/*.js > target/lint.checkstyle || test $$? = 2
 
-test:
-	mocha test --recursive --colors | fix-dark-on-dark
+test-unit:
+	mocha tests/unit --recursive --colors | fix-dark-on-dark
 
-spec:
+test-func:
+	npm start &
+	sleep 1
 	make import-test-data
-	mocha spec --recursive --colors | fix-dark-on-dark
+	mocha tests/func --recursive --colors | fix-dark-on-dark
+	npm stop
 
 export-test-data:
 	mongoexport --db arslinguis --collection main \
-		--out  spec/test-data.mongoexport
+		--out  tests/func/test-data.mongoexport
 
 import-test-data:
 	mongoimport --db arslinguis --collection main \
-		--drop spec/test-data.mongoexport
+		--drop tests/func/test-data.mongoexport
 
 tap:
 	mkdir -p target
