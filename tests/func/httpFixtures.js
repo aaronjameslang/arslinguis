@@ -50,3 +50,25 @@ fixtures.push({
 		"_body" : ""
 	}
 });
+
+fixtures.push({
+	"request" : {
+		"method" : "GET",
+		"path" : "/users/a0ebf328-0c73-4f22-8930-e013c17d3c2a",
+		"headers" : {
+			"accept" : "text/html"
+		}
+	},
+	"response" : {
+		"statusCode" : 200,
+		"headers" : {
+			"content-type" : "text/html"
+		},
+		"_body" : function(actualBody, chai) {
+			var substrings = ['William Annis'];
+			substrings.forEach(function(substring) {
+				chai.expect(actualBody).to.contain(substring);
+			});
+		}
+	}
+});

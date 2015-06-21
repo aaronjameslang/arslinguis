@@ -46,16 +46,23 @@ function testResponse(done, fixture, response) {
 			expect(actualValue).to.equal(expectedValue, message);
 		}
 	}
-	if (!fixture.response._body) {
+	var testBody = fixture.response._body;
+	if (!testBody) {
 		done();
 		return;
+	}
+	if (!(testBody instanceof Function)) {
+		var expectedBody = testBody;
+		testBody = function(actualBody, chai) {
+			chai.expect(actualBody).to.equal(expectedBody);
+		};
 	}
 	readWholeStream(response, function(error, actualBody) {
 		if (error) {
 			done(error);
 			return;
 		}
-		expect(actualBody).to.equal(fixture.response._body);
+		testBody(actualBody, chai);
 		done();
 	});
 }
