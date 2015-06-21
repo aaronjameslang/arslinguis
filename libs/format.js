@@ -22,7 +22,7 @@ module.exports = function(request, response, data) {
 
 function format_html(request, response, data) {
 	var Handlebars = require('handlebars');
-	require('./templates/templates.js');
+	require('../target/templates.js');
 	require('./templates/helpers.js');
 	Handlebars.partials = Handlebars.templates;
 
