@@ -1,4 +1,4 @@
-default: install test lint
+default: install test-unit lint
 
 install:
 	npm install
