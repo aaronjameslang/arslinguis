@@ -5,3 +5,9 @@ Handlebars.registerHelper('name', function() {
 
 	return this.names[0];
 });
+
+Handlebars.registerHelper('description', function() {
+	if (this.description) return this.description;
+
+	return this.descriptions[0];
+});

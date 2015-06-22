@@ -65,7 +65,7 @@ fixtures.push({
 			"content-type" : "text/html"
 		},
 		"_body" : function(actualBody, chai) {
-			var substrings = ['William Annis'];
+			var substrings = ['William Annis', 'describe William Annis'];
 			substrings.forEach(function(substring) {
 				chai.expect(actualBody).to.contain(substring);
 			});
