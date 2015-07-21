@@ -14,20 +14,20 @@ compile-templates:
 lint: jshint
 
 jshint:
-	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish . | fix-dark-on-dark || test $$? = 2
+	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish . || test $$? = 2
 
 checkstyle:
 	mkdir -p target
 	jshint --exclude-path=.gitignore --reporter=checkstyle . > target/lint.checkstyle || test $$? = 2
 
 test-unit:
-	mocha tests/unit --recursive --colors | fix-dark-on-dark
+	mocha tests/unit --recursive --colors
 
 test-func:
 	npm start &
 	sleep 1
 	make import-test-data
-	mocha tests/func --recursive --colors | fix-dark-on-dark
+	mocha tests/func --recursive --colors
 	npm stop
 
 export-test-data:
