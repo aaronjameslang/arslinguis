@@ -37,11 +37,14 @@ describe('getCookie', function() {
 
 function testFixture(string, object) {
 	var request = {headers:{cookie:string}};
+
+	function testKvPair(key) {
+		var expectedValue = object[key];
+		var actualValue = getCookie(request, key);
+		expect(actualValue).to.equal(expectedValue);
+	}
+
 	for (var key in object) {
-		it('should find ' + key + ' in ' + string, function(key) {
-			var expectedValue = object[key];
-			var actualValue = getCookie(request, key);
-			expect(actualValue).to.equal(expectedValue);
-		}.bind(null, key));
+		it('should find ' + key + ' in ' + string, testKvPair.bind(null, key));
 	}
 }
