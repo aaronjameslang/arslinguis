@@ -31,11 +31,11 @@ test-func:
 	npm stop
 
 export-test-data:
-	mongoexport --db arslinguis --collection main \
+	mongoexport --host=127.0.0.1 --db arslinguis --collection main \
 		--out  tests/func/test-data.mongoexport
 
 import-test-data:
-	mongoimport --db arslinguis --collection main \
+	mongoimport --host=127.0.0.1 --db arslinguis --collection main \
 		--drop tests/func/test-data.mongoexport
 
 tap:
