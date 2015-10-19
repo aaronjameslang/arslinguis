@@ -1,4 +1,4 @@
 module.exports = {
-	'/css/style': '',
-	'/js/script': ''
+  '/css/style': '',
+  '/js/script': ''
 };

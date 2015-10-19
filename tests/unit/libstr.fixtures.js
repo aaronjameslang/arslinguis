@@ -1,5 +1,5 @@
 module.exports = {
-	user: 'users',
-	language: 'languages',
-	word: 'words'
+  user: 'users',
+  language: 'languages',
+  word: 'words'
 };
