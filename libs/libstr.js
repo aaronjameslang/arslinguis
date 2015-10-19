@@ -1,10 +1,14 @@
 exports.toPlural = function(string) {
-  if (exports.isPlural(string)) return string;
+  if (exports.isPlural(string)) {
+    return string;
+  }
   return string + 's' ;
 };
 
 exports.toSingular = function(string) {
-  if (!exports.isPlural(string)) return string;
+  if (!exports.isPlural(string)) {
+    return string;
+  }
   return string.slice(0, -1);
 };
 

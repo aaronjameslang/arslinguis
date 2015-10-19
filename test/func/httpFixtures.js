@@ -13,7 +13,10 @@ fixtures.push({
     headers: {
       'content-type': 'application/json',
     },
-    _body: '{"names":["William Annis"],"descriptions":["TODO: describe William Annis"],"type":"user","id":"a0ebf328-0c73-4f22-8930-e013c17d3c2a"}',
+    _body: '' +
+      '{"names":["William Annis"],"descriptions":["TODO: describe Willi' +
+      'am Annis"],"type":"user","id":"a0ebf328-0c73-4f22-8930-e013c17d3' +
+      'c2a"}',
   },
 });
 

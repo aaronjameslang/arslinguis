@@ -10,7 +10,8 @@ var fixtures = [
     username: 'username',
     password: 'password',
   }, {
-    b64s: ['ZG9tYWluL3VzZXJuYW1lOnBhc3N3b3Jk'], // domain/username:password
+    // domain/username:password
+    b64s: ['ZG9tYWluL3VzZXJuYW1lOnBhc3N3b3Jk'],
     domain: 'domain',
     username: 'username',
     password: 'password',
@@ -20,7 +21,8 @@ var fixtures = [
     username: 'fish&chips',
     password: 'rock!!!',
   }, {
-    b64s: ['ZCUzQSUyRiUzRi9kYXZlJTNGISUyRiUzQiUzQSUyRjovLzo6MTIz'], // d%3A%2F%3F/dave%3F!%2F%3B%3A%2F://::123
+    // d%3A%2F%3F/dave%3F!%2F%3B%3A%2F://::123
+    b64s: ['ZCUzQSUyRiUzRi9kYXZlJTNGISUyRiUzQiUzQSUyRjovLzo6MTIz'],
     domain: 'd:/?',
     username: 'dave?!/;:/',
     password: '//::123',
@@ -42,9 +44,15 @@ function testEncode(b64, credential) {
 describe('credentialCodec', function() {
   fixtures.forEach(function(fixture) {
     console.log(fixture);
-    it('should be able to encode ' + fixture.b64s[0], testEncode.bind(null, fixture.b64s[0], fixture));
+    it(
+      'should be able to encode ' + fixture.b64s[0],
+      testEncode.bind(null, fixture.b64s[0], fixture)
+    );
     fixture.b64s.forEach(function(b64) {
-      it('should be able to decode ' + b64, testDecode.bind(null, b64, fixture));
+      it(
+        'should be able to decode ' + b64,
+         testDecode.bind(null, b64, fixture)
+      );
     });
   });
 });

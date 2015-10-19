@@ -12,11 +12,19 @@ describe('libstr', function() {
     it('should know "' + singular + '" is singular', function() {
       libstr.isPlural(singular).should.equal(false);
     });
-    it('should know the singular of "' + plural + '" is "' + singular + '"', function() {
-      libstr.toSingular(plural).should.equal(singular);
-    });
-    it('should know the plural of "' + singular + '" is "' + plural + '"', function() {
-      libstr.toPlural(singular).should.equal(plural);
-    });
+    it(
+      'should know the singular of "' + plural +
+      '" is "' + singular + '"',
+      function() {
+        libstr.toSingular(plural).should.equal(singular);
+      }
+    );
+    it(
+      'should know the plural of "' + singular +
+      '" is "' + plural + '"',
+      function() {
+        libstr.toPlural(singular).should.equal(plural);
+      }
+    );
   });
 });

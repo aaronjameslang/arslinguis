@@ -15,10 +15,15 @@ var fixtures = [{
 },];
 
 function testFixture(fixture) {
-  it('should format ' + fixture.template + ' into ' + fixture.expectedOutput, function() {
-    var actualOutput = Handlebars.compile(fixture.template)(fixture.data);
-    expect(actualOutput).to.equal(fixture.expectedOutput);
-  });
+  it(
+    'should format ' + fixture.template +
+    ' into ' + fixture.expectedOutput,
+    function() {
+      var actualOutput =
+        Handlebars.compile(fixture.template)(fixture.data);
+      expect(actualOutput).to.equal(fixture.expectedOutput);
+    }
+  );
 }
 
 describe('templateHelpers', function() {

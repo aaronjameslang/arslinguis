@@ -5,7 +5,7 @@ exports.AuthenticationError = AuthenticationError;
 exports.ContentNegotiationError = ContentNegotiationError;
 
 function ArslinguisError() {
-  //Error.apply(this, arguments);
+  // Error.apply(this, arguments);
   if (arguments.length) {
     this.message = arguments[0];
   }
@@ -28,4 +28,4 @@ function ContentNegotiationError() {
 ContentNegotiationError.prototype = Object.create(ArslinguisError.prototype);
 ContentNegotiationError.prototype.constructor = ContentNegotiationError;
 ContentNegotiationError.prototype.name = 'ContentNegotiationError';
-ContentNegotiationError.prototype.code = 400; //TODO
+ContentNegotiationError.prototype.code = 400; // TODO

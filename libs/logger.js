@@ -15,7 +15,7 @@ function logError(error) {
   process.stdout.write('  ');
   process.stdout.write(error.stack);
   process.stdout.write('\n');
-  //process.out.write(error.stack);
+  // process.out.write(error.stack);
   var dbCollection = db.collection('errorLogs');
   var document = _.pick('name', 'message', 'stack', 'code');
   return dbCollection.insert(document);

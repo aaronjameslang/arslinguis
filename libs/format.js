@@ -5,9 +5,9 @@ var errors = require('./errors.js');
 var ContentNegotiationError = errors.ContentNegotiationError;
 
 var formats = {
-  'text/html': format_html,
-  'application/json': format_json,
-  'application/xml': format_xml,
+  'text/html': formatHtml,
+  'application/json': formatJson,
+  'application/xml': formatXml,
 };
 
 var mimeTypes = Object.keys(formats);
@@ -20,7 +20,7 @@ module.exports = function(request, response, data) {
   format(request, response, data);
 };
 
-function format_html(request, response, data) {
+function formatHtml(request, response, data) {
   var Handlebars = require('handlebars');
   require('../target/templates.js');
   require('./templates/helpers.js');
@@ -30,12 +30,12 @@ function format_html(request, response, data) {
   response.write(string);
 }
 
-function format_json(request, response, data) {
+function formatJson(request, response, data) {
   var json = JSON.stringify(data);
   response.write(json);
 }
 
-function format_xml(request, response, data) {
+function formatXml(request, response, data) {
   var json = JSON.stringify(data);
   response.write(json);
 }

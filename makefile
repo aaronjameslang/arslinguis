@@ -19,28 +19,28 @@ jshint:
 	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish . || test $$? = 2
 
 jscs:
-	jscs libs tests *.js
+	jscs libs test *.js
 
 jscsx:
-	jscs libs tests *.js --fix
+	jscs libs test *.js --fix || test $$? = 2
 
 checkstyle:
 	mkdir -p target
 	jshint --exclude-path=.gitignore --reporter=checkstyle . > target/lint.checkstyle || test $$? = 2
 
 test-unit:
-	mocha tests/unit --recursive --colors
+	mocha test/unit --recursive --colors
 
 test-func: import-test-data
-	mocha tests/func --recursive --colors --require server.js
+	mocha test/func --recursive --colors --require server.js
 
 export-test-data:
 	mongoexport --host=127.0.0.1 --db arslinguis --collection main \
-		--out  tests/func/test-data.mongoexport
+		--out  test/func/test-data.mongoexport
 
 import-test-data:
 	mongoimport --host=127.0.0.1 --db arslinguis --collection main \
-		--drop tests/func/test-data.mongoexport
+		--drop test/func/test-data.mongoexport
 
 tap:
 	mkdir -p target
