@@ -14,7 +14,7 @@ var COOKIE_NAME = 'arslinguis-session-id';
 module.exports = authenticate;
 
 function authenticateSession(sessionId) {
-  return db.findOne({id:sessionId, type:'session'})
+  return db.findOne({id: sessionId, type: 'session'})
   .then(function(session) {
     if (!session) {
       throw new AuthenticationError('Unauthorised session ID: ' + sessionId);
@@ -36,7 +36,7 @@ function authenticateAuthorization(authorization) {
 }
 
 function authenticateCredential(actualCredential) {
-  var criteria = {username:actualCredential.username};
+  var criteria = {username: actualCredential.username};
   if (actualCredential.domain) {
     criteria.domain = actualCredential.domain;
   }
@@ -59,7 +59,7 @@ function authenticateCredential(actualCredential) {
       id: genId(),
       type: 'session',
       userId: expectedCredential.userId,
-      ctime: Date.now()
+      ctime: Date.now(),
     };
     return db.insert(session);
   })

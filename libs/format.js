@@ -7,7 +7,7 @@ var ContentNegotiationError = errors.ContentNegotiationError;
 var formats = {
   'text/html': format_html,
   'application/json': format_json,
-  'application/xml': format_xml
+  'application/xml': format_xml,
 };
 
 var mimeTypes = Object.keys(formats);
