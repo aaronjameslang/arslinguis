@@ -60,4 +60,7 @@ clover:
 
 	rm coverage
 
+clean:
+	< .gitignore xargs rm -rf
+
 .PHONY: test spec
