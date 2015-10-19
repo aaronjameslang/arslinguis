@@ -1,4 +1,5 @@
-default: install test-unit test-func lint
+default: install offline
+offline: format test lint sniff
 
 install:
 	npm install
@@ -13,16 +14,16 @@ compile-templates:
 
 lint: jshint
 sniff: jscs
-fix: jscsx
+format: jscsx
 
 jshint:
-	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish . || test $$? = 2
+	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish .
 
 jscs:
 	jscs libs test *.js
 
 jscsx:
-	jscs libs test *.js --fix || test $$? = 2
+	jscs libs test *.js --fix
 
 checkstyle:
 	mkdir -p target
@@ -34,6 +35,9 @@ test-unit:
 test-func: import-test-data
 	mocha test/func --recursive --colors --require server.js
 
+test: import-test-data
+	mocha --recursive --colors --require server.js
+
 export-test-data:
 	mongoexport --host=127.0.0.1 --db arslinguis --collection main \
 		--out  test/func/test-data.mongoexport
@@ -42,20 +46,15 @@ import-test-data:
 	mongoimport --host=127.0.0.1 --db arslinguis --collection main \
 		--drop test/func/test-data.mongoexport
 
-tap:
+tap: import-test-data
 	mkdir -p target
-	mocha tests/unit --recursive --reporter=tap > target/unit.tap
-	npm start &
-	sleep 1
-	make import-test-data
-	mocha tests/func --recursive --reporter=tap > target/func.tap
-	npm stop
+	mocha --recursive --reporter=tap --require server.js > target/tap
 
 clover:
 	mkdir -p target/coverage
 	ln -s target/coverage coverage
 
-	istanbul cover _mocha tests/unit -- --recursive --reporter=tap > target/test.tap
+	istanbul cover _mocha test/unit -- --recursive --reporter=tap > target/test.tap
 	istanbul report clover
 
 	rm coverage
