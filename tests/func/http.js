@@ -1,7 +1,6 @@
 var chai = require('chai');
 chai.use(require('chai-properties'));
 var expect = chai.expect;
-var fs = require('fs');
 var http = require('http');
 
 var fixtures = require('./httpFixtures.js');
