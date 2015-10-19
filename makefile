@@ -1,4 +1,4 @@
-default: install test-unit lint
+default: install test-unit test-func lint
 
 install:
 	npm install
@@ -23,12 +23,8 @@ checkstyle:
 test-unit:
 	mocha tests/unit --recursive --colors
 
-test-func:
-	npm start &
-	sleep 1
-	make import-test-data
-	mocha tests/func --recursive --colors
-	npm stop
+test-func: import-test-data
+	mocha tests/func --recursive --colors --require server.js
 
 export-test-data:
 	mongoexport --host=127.0.0.1 --db arslinguis --collection main \
