@@ -10,7 +10,6 @@ var getCookie = require('./getCookie.js');
 var hash = Q.nbind(bcrypt.hash, bcrypt);
 var COOKIE_NAME = 'arslinguis-session-id';
 
-
 module.exports = authenticate;
 
 function authenticateSession(sessionId) {
@@ -67,7 +66,6 @@ function authenticateCredential(actualCredential) {
     return session;
   });
 }
-
 
 function authenticate(request) {
   var sessionId = getCookie(request, COOKIE_NAME);

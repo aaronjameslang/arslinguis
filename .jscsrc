@@ -1,4 +1,4 @@
 {
-  "preset": "node-style-guide",
+  "preset": "google",
   "requireCapitalizedComments": false
 }

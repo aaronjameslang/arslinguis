@@ -29,14 +29,8 @@ checkstyle:
 	mkdir -p target
 	jshint --exclude-path=.gitignore --reporter=checkstyle . > target/lint.checkstyle || test $$? = 2
 
-test-unit:
-	mocha test/unit --recursive --colors
-
-test-func: import-test-data
-	mocha test/func --recursive --colors --require server.js
-
 test: import-test-data
-	mocha --recursive --colors --require server.js
+	mocha --recursive --colors --require test/_support/bootstrap.js
 
 export-test-data:
 	mongoexport --host=127.0.0.1 --db arslinguis --collection main \

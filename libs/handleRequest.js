@@ -26,7 +26,7 @@ function handleRequest(request, response) {
     var isStatic = /^\/static\//.test(urlPath);
     var urlPathParts = urlPath.split('/');
     if (isStatic) {
-      return serveStaticResponse (request, response, urlPath);
+      return serveStaticResponse(request, response, urlPath);
     } else {
       return serveDynamicResponse(request, response, urlPath);
     }
