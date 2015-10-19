@@ -19,10 +19,10 @@ jshint:
 	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish . || test $$? = 2
 
 jscs:
-	jscs libs
+	jscs libs tests *.js
 
 jscsx:
-	jscs libs --fix
+	jscs libs tests *.js --fix
 
 checkstyle:
 	mkdir -p target
