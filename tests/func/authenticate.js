@@ -5,22 +5,22 @@ var http = require('http');
 var authenticate = require('../../libs/authenticate.js');
 
 var passwords = {
-  "christophe.grandsire-koevoets":
-    "3kPTRbVWFtoCHqAsiJoVsTyCwmwg7wAN.christophe.grandsire-koevoets",
-  "david.peterson":
-    "TRNawvy97skk4hxishETr4NybTTMEdRJ.david.peterson",
-  "george.corley":
-    "vvhtaXqo4TcFVXtwaKtgchAWUHpprvYn.george.corley",
-  "john.quijada":
-    "bmrEk7cz7ipUhzmaVbM7TusPLxfziAqj.john.quijada",
-  "matt.pearson":
-    "EMCxvCpvkpVywxkfPqCdoKPmFg4PxWK9.matt.pearson",
-  "sai":
-    "imKMpL49M4YLfuuKabuibeFTdoJXjEyx.sai",
-  "samantha.harrison":
-    "nPUM9PMMrbszJJTHmnaLncKVjhFKqVnu.samantha.harrison",
-  "william.annis":
-    "oA7EnpstRPqgqgWnLuVePj7RY7Ax3tAk.william.annis"
+  'christophe.grandsire-koevoets':
+    '3kPTRbVWFtoCHqAsiJoVsTyCwmwg7wAN.christophe.grandsire-koevoets',
+  'david.peterson':
+    'TRNawvy97skk4hxishETr4NybTTMEdRJ.david.peterson',
+  'george.corley':
+    'vvhtaXqo4TcFVXtwaKtgchAWUHpprvYn.george.corley',
+  'john.quijada':
+    'bmrEk7cz7ipUhzmaVbM7TusPLxfziAqj.john.quijada',
+  'matt.pearson':
+    'EMCxvCpvkpVywxkfPqCdoKPmFg4PxWK9.matt.pearson',
+  sai:
+    'imKMpL49M4YLfuuKabuibeFTdoJXjEyx.sai',
+  'samantha.harrison':
+    'nPUM9PMMrbszJJTHmnaLncKVjhFKqVnu.samantha.harrison',
+  'william.annis':
+    'oA7EnpstRPqgqgWnLuVePj7RY7Ax3tAk.william.annis',
 };
 
 function Request() {}
@@ -45,7 +45,7 @@ describe('authenticate', function() {
   });
   it('should stay logged in as Sam', function() {
     var request = new Request();
-    request.headers = {cookie: 'arslinguis-session-id='+sessionId};
+    request.headers = {cookie: 'arslinguis-session-id=' + sessionId};
     return authenticate(request)
     .then(function(session) {
       expect(session).to.be.an('object');

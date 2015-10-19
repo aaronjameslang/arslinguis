@@ -24,13 +24,13 @@ describe('Database', function() {
     });
   });
   it('should respond with a user', function() {
-    return db.findOne({type:'user'}).then(function(document) {
+    return db.findOne({type: 'user'}).then(function(document) {
       expect(document).to.be.an('object');
       expect(document.type).to.equal('user');
     });
   });
   it('should respond with a language', function() {
-    return db.findOne({type:'language'}).then(function(document) {
+    return db.findOne({type: 'language'}).then(function(document) {
       expect(document).to.be.an('object');
       expect(document.type).to.equal('language');
     });

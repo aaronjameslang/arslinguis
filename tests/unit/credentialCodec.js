@@ -6,30 +6,30 @@ var credentialCodec = require('../../libs/credentialCodec.js');
 var fixtures = [
   {
     b64s: ['dXNlcm5hbWU6cGFzc3dvcmQ=', // username:password
-      'L3VzZXJuYW1lOnBhc3N3b3Jk'], // /username:password
+      'L3VzZXJuYW1lOnBhc3N3b3Jk',], // /username:password
     username: 'username',
-    password: 'password'
+    password: 'password',
   }, {
     b64s: ['ZG9tYWluL3VzZXJuYW1lOnBhc3N3b3Jk'], // domain/username:password
     domain: 'domain',
     username: 'username',
-    password: 'password'
+    password: 'password',
   }, {
     b64s: ['ZmlzaCUyNmNoaXBzOnJvY2shISE=', // fish%26chips:rock!!!
-      'ZmlzaCZjaGlwczpyb2NrISEh'], // fish&chips:rock!!!
+      'ZmlzaCZjaGlwczpyb2NrISEh',], // fish&chips:rock!!!
     username: 'fish&chips',
-    password: 'rock!!!'
+    password: 'rock!!!',
   }, {
     b64s: ['ZCUzQSUyRiUzRi9kYXZlJTNGISUyRiUzQiUzQSUyRjovLzo6MTIz'], // d%3A%2F%3F/dave%3F!%2F%3B%3A%2F://::123
     domain: 'd:/?',
     username: 'dave?!/;:/',
-    password: '//::123'
-  }
+    password: '//::123',
+  },
 ];
 
 function testDecode(b64, credential) {
   var actualCredential = credentialCodec.decode(b64);
-  expect(actualCredential.domain||'').to.equal(credential.domain||'');
+  expect(actualCredential.domain || '').to.equal(credential.domain || '');
   expect(actualCredential.username).to.equal(credential.username);
   expect(actualCredential.password).to.equal(credential.password);
 }
