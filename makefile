@@ -12,9 +12,17 @@ compile-templates:
 		-c handlebars
 
 lint: jshint
+sniff: jscs
+fix: jscsx
 
 jshint:
 	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish . || test $$? = 2
+
+jscs:
+	jscs libs
+
+jscsx:
+	jscs libs --fix
 
 checkstyle:
 	mkdir -p target
