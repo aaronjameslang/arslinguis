@@ -26,6 +26,7 @@
     "chai-as-promised": "^4.2.0",
     "chai-http": "^1.0.0",
     "chai-properties": "^1.2.0",
+    "deepmerge": "^0.2.10",
     "istanbul": "^0.3.15",
     "jscs": "^2.3.4",
     "jshint": "^2.8.0",
