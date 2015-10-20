@@ -1,33 +1,34 @@
-default: install offline
-offline: format test lint sniff
+default: set-up format test sniff
 
-install:
+# Set Up
+
+set-up: node_modules npm-shrinkwrap.json templates
+
+node_modules: package.json
 	npm install
-	make compile-templates
 
-compile-templates:
+npm-shrinkwrap.json: node_modules
+	npm shrinkwrap --dev
+
+templates: target/templates.js
+target/templates.js:
 	mkdir -p target
 	handlebars libs/templates/* \
 		-f target/templates.js \
 		--map target/templates.js.map \
 		-c handlebars
 
-lint: jshint
-sniff: jscs
-format: jscsx
+# Run
 
-jshint:
-	jshint --exclude-path=.gitignore --reporter=node_modules/jshint-stylish .
-
-jscs:
+sniff:
+	jshint . \
+		--exclude-path=.gitignore \
+		--reporter=node_modules/jshint-stylish
 	jscs libs test *.js
 
-jscsx:
+format:
 	jscs libs test *.js --fix
 
-checkstyle:
-	mkdir -p target
-	jshint --exclude-path=.gitignore --reporter=checkstyle . > target/lint.checkstyle || test $$? = 2
 
 test: import-test-data
 	mocha --recursive --colors --require test/_support/bootstrap.js
@@ -40,20 +41,29 @@ import-test-data:
 	mongoimport --host=127.0.0.1 --db arslinguis --collection main \
 		--drop test/func/test-data.mongoexport
 
-tap: import-test-data
-	mkdir -p target
-	mocha --recursive --reporter=tap --require server.js > target/tap
+# CI
 
-clover:
+report: import-test-data
 	mkdir -p target/coverage
 	ln -s target/coverage coverage
 
-	istanbul cover _mocha test/unit -- --recursive --reporter=tap > target/test.tap
+	jshint \
+		--exclude-path=.gitignore \
+		--reporter=checkstyle . \
+		> target/checkstyle
+	istanbul cover \
+		_mocha -- \
+		--recursive \
+		--reporter=tap \
+		--require test/_support/bootstrap.js \
+		> target/tap
 	istanbul report clover
 
 	rm coverage
 
+# Tear Down
+
 clean:
 	< .gitignore xargs rm -rf
 
-.PHONY: test spec
+.PHONY: test
