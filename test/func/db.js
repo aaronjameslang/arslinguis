@@ -5,6 +5,7 @@ chai.use(require('chai-as-promised'));
 var db;
 
 describe('Database', function() {
+  beforeEach(dbfixtures.load);
   it('should initialise without errors', function() {
     db = require('../../libs/db.js');
     expect(db).to.be.an('object');

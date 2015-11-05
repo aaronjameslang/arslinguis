@@ -29,21 +29,12 @@ sniff:
 format:
 	jscs libs test *.js --fix
 
-
-test: import-test-data
+test:
 	mocha --recursive --colors --require test/_support/bootstrap.js
-
-export-test-data:
-	mongoexport --host=127.0.0.1 --db arslinguis --collection main \
-		--out  test/func/test-data.mongoexport
-
-import-test-data:
-	mongoimport --host=127.0.0.1 --db arslinguis --collection main \
-		--drop test/func/test-data.mongoexport
 
 # CI
 
-report: import-test-data
+report:
 	mkdir -p target/coverage
 	ln -s target/coverage coverage
 

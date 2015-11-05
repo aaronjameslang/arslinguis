@@ -1,4 +1,5 @@
 describe('GET /user HTML', function() {
+  before(dbfixtures.load);
 
   it('should respond 200 OK, with William Annis', function(done) {
     var request = {

@@ -4,4 +4,4 @@ chai = require('chai');
 expect = chai.expect;
 
 dispatch = require('./dispatch');
-// dbfixtures = require('./dbfixtures');
+dbfixtures = require('./dbfixtures');

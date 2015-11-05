@@ -26,6 +26,7 @@ var passwords = {
 function Request() {}
 
 describe('authenticate', function() {
+  before(dbfixtures.load);
   var sessionId;
   it('should be able to log in as Sam', function() {
     var request = new Request();
