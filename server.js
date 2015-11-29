@@ -13,4 +13,4 @@ fs.writeFileSync(config.pidFile || 'pid', process.pid);
 app.use(handleRequest);
 app.listen(config.bindTo);
 
-console.log('Bound to' + config.bindTo);
+console.log('Bound to ' + config.bindTo);
