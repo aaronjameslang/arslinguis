@@ -1,0 +1,4 @@
+#! /bin/sh
+set eu
+docker build --tag arslinguis/build docker/build
+docker run -tiv $PWD:/home/arslinguis/arslinguis arslinguis/build

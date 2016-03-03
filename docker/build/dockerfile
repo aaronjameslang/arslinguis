@@ -1,0 +1,9 @@
+FROM node
+MAINTAINER arslinguis
+
+RUN useradd -m arslinguis
+USER arslinguis
+
+ENV PATH $PATH:./node_modules/.bin
+WORKDIR /home/arslinguis/arslinguis
+ENTRYPOINT bash
