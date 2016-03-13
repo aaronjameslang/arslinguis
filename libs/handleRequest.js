@@ -3,8 +3,6 @@ var liburl = require('url');
 
 var authenticate = require('./authenticate.js');
 var db = require('./db.js');
-var errors = require('./errors.js');
-var format = require('./format.js');
 var getCriteria = require('./getCriteria.js');
 var logger = require('./logger.js');
 
@@ -24,9 +22,12 @@ function handleRequest(request, response) {
     var urlPath = liburl.parse(request.url, true).path;
     var criteria = getCriteria(urlPath);
     var methodName = criteria.id ? 'findOne' : 'find';
-    var format_ = format.bind(null, request, response);
-    return db[methodName](criteria)
-        .then(format_);
+    return db[methodName](criteria);
+  })
+  .then(function(data) {
+    response.setHeader('content-type', 'application/json');
+    var json = JSON.stringify(data);
+    response.write(json);
   })
   .catch(function(error) {
     return Q.all(
