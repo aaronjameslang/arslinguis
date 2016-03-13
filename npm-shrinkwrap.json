@@ -374,6 +374,18 @@
       "from": "cookie@0.1.5",
       "resolved": "https://registry.npmjs.org/cookie/-/cookie-0.1.5.tgz"
     },
+    "cookie-parser": {
+      "version": "1.4.1",
+      "from": "cookie-parser@latest",
+      "resolved": "https://registry.npmjs.org/cookie-parser/-/cookie-parser-1.4.1.tgz",
+      "dependencies": {
+        "cookie": {
+          "version": "0.2.3",
+          "from": "cookie@0.2.3",
+          "resolved": "https://registry.npmjs.org/cookie/-/cookie-0.2.3.tgz"
+        }
+      }
+    },
     "cookie-signature": {
       "version": "1.0.6",
       "from": "cookie-signature@1.0.6",

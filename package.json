@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "bcrypt": "^0.8.1",
+    "cookie-parser": "^1.4.1",
     "express": "^4.12.2",
     "formidable": "^1.0.17",
     "lodash": "^3.3.1",
