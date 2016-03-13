@@ -4,7 +4,7 @@ var Q = require('q');
 var credentialCodec = require('./authenticate/credentialCodec.js');
 var db = require('./db.js');
 var AuthenticationError = require('./errors.js').AuthenticationError;
-var genId = require('./genId.js');
+var genId = require('node-uuid').v4;
 var getCookie = require('./getCookie.js');
 
 var hash = Q.nbind(bcrypt.hash, bcrypt);
