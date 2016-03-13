@@ -3,7 +3,7 @@ describe('GET /user JSON', function() {
 
   it('should respond 200 OK, with William Annis', function(done) {
     var request = {
-      path: '/users/a0ebf328-0c73-4f22-8930-e013c17d3c2a',
+      path: '/user/a0ebf328-0c73-4f22-8930-e013c17d3c2a',
       headers: {
         accept: 'application/json',
       },
@@ -22,7 +22,7 @@ describe('GET /user JSON', function() {
 
   it('should respond 200 OK, with Samantha Harrison', function(done) {
     var request = {
-      path: '/users/d0bc1cb3-87c2-4d9c-9dde-6a02b40e1ebe',
+      path: '/user/d0bc1cb3-87c2-4d9c-9dde-6a02b40e1ebe',
       headers: {
         accept: 'application/json',
       },
@@ -41,7 +41,7 @@ describe('GET /user JSON', function() {
 
   it('should respond 200 OK, with eight users', function(done) {
     var request = {
-      path: '/users',
+      path: '/user',
       headers: {
         accept: 'application/json',
       },

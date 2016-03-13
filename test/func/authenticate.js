@@ -30,6 +30,7 @@ describe('authenticate', function() {
   var sessionId;
   it('should be able to log in as Sam', function() {
     var request = new Request();
+    request.cookies = {};
     var name = 'samantha.harrison';
     var buffer = new Buffer(name + ':' + passwords[name]);
     var authorization = 'Basic ' + buffer.toString('base64');
@@ -46,7 +47,7 @@ describe('authenticate', function() {
   });
   it('should stay logged in as Sam', function() {
     var request = new Request();
-    request.headers = {cookie: 'arslinguis-session-id=' + sessionId};
+    request.cookies = {'arslinguis-session-id': sessionId};
     return authenticate(request)
     .then(function(session) {
       expect(session).to.be.an('object');

@@ -9,17 +9,14 @@
   },
   "dependencies": {
     "bcrypt": "^0.8.1",
+    "cookie-parser": "^1.4.1",
     "express": "^4.12.2",
     "formidable": "^1.0.17",
-    "handlebars": "^3.0.0",
-    "jquery": "^2.1.3",
     "lodash": "^3.3.1",
     "mongodb": "^1.4.33",
-    "negotiator": "^0.5.1",
     "node-uuid": "^1.4.2",
     "promised-mongo": "^0.11.1",
-    "q": "^1.4.1",
-    "underscore": "^1.8.2"
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^2.1.0",

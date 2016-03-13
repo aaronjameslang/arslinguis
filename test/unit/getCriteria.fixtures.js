@@ -2,7 +2,7 @@ module.exports = exports = [];
 
 exports.push({
   input: {
-    url: '/users',
+    url: '/user',
   },
   output: {
     collection: true,
@@ -14,7 +14,7 @@ exports.push({
 
 exports.push({
   input: {
-    url: '/users/oOvzKAxzTyKJMOATwX08Kg',
+    url: '/user/oOvzKAxzTyKJMOATwX08Kg',
   },
   output: {
     collection: false,
@@ -26,7 +26,7 @@ exports.push({
 
 exports.push({
   input: {
-    url: '/users/oOvzKAxzTyKJMOATwX08Kg/languages',
+    url: '/user/oOvzKAxzTyKJMOATwX08Kg/language',
   },
   output: {
     collection: true,
@@ -39,7 +39,7 @@ exports.push({
 
 exports.push({
   input: {
-    url: '/users/oOvzKAxzTyKJMOATwX08Kg/languages/Edo_qdoITyeOrRKFIuX1-w',
+    url: '/user/oOvzKAxzTyKJMOATwX08Kg/language/Edo_qdoITyeOrRKFIuX1-w',
   },
   output: {
     collection: false,
@@ -51,7 +51,7 @@ exports.push({
 
 exports.push({
   input: {
-    url: '/languages/Edo_qdoITyeOrRKFIuX1-w',
+    url: '/language/Edo_qdoITyeOrRKFIuX1-w',
   },
   output: {
     collection: false,

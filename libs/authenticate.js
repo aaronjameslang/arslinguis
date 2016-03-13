@@ -1,11 +1,10 @@
 var bcrypt = require('bcrypt');
 var Q = require('q');
 
-var credentialCodec = require('./credentialCodec.js');
+var credentialCodec = require('./authenticate/credentialCodec.js');
 var db = require('./db.js');
 var AuthenticationError = require('./errors.js').AuthenticationError;
-var genId = require('./genId.js');
-var getCookie = require('./getCookie.js');
+var genId = require('node-uuid').v4;
 
 var hash = Q.nbind(bcrypt.hash, bcrypt);
 var COOKIE_NAME = 'arslinguis-session-id';
@@ -68,7 +67,7 @@ function authenticateCredential(actualCredential) {
 }
 
 function authenticate(request) {
-  var sessionId = getCookie(request, COOKIE_NAME);
+  var sessionId = request.cookies[COOKIE_NAME];
   if (sessionId) {
     return authenticateSession(sessionId);
   }

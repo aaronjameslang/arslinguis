@@ -1,6 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 chai.use(require('chai-properties'));
+require('chai').should();
 
 var getCriteria = require('../../libs/getCriteria.js');
 expect(getCriteria).to.be.a('function');

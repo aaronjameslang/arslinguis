@@ -1,7 +1,5 @@
 var liburl = require('url');
 
-var libstr = require('./libstr.js');
-
 module.exports = getCriteria;
 
 function getCriteria(url) {
@@ -24,14 +22,14 @@ function getCriteria(url) {
     throw new Error('Mathematically impossible');
   }
 
-  criteria.type = libstr.toSingular(parts.pop());
+  criteria.type = parts.pop();
 
   if (!parts.length) {
     return criteria;
   }
 
   var parentId = parts.pop();
-  var parentType = libstr.toSingular(parts.pop());
+  var parentType = parts.pop();
   criteria[parentType + 'Id'] = parentId;
 
   return criteria;
