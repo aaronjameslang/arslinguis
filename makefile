@@ -1,24 +1,6 @@
-default: set-up format test sniff
+default: build format test sniff
 
 include makefile.d/*
-
-# Set Up
-
-set-up: node_modules npm-shrinkwrap.json templates
-
-node_modules: package.json
-	npm install
-
-npm-shrinkwrap.json: node_modules
-	npm shrinkwrap --dev
-
-templates: target/templates.js
-target/templates.js:
-	mkdir -p target
-	handlebars libs/templates/* \
-		-f target/templates.js \
-		--map target/templates.js.map \
-		-c handlebars
 
 # Run
 
