@@ -1,4 +1,8 @@
 #! /bin/sh
-set eu
+set -eu
+
 docker build --tag arslinguis/build docker/build
-docker run -tiv $PWD:/home/arslinguis/arslinguis arslinguis/build
+docker run -ti \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v $(which docker):/bin/docker \
+  -v $PWD:/home/arslinguis/arslinguis arslinguis/build

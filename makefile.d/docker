@@ -1,0 +1,5 @@
+# vi: set ft=make :
+
+docker-db:
+	docker build --tag arslinguis/db docker/db
+	docker run -d arslinguis/db

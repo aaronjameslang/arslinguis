@@ -31,7 +31,7 @@ sniff:
 format:
 	jscs libs test *.js --fix
 
-test:
+test: docker-db
 	mocha --recursive --colors --require test/_support/bootstrap.js
 
 # CI
