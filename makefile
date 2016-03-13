@@ -1,5 +1,7 @@
 default: set-up format test sniff
 
+include makefile.d/*
+
 # Set Up
 
 set-up: node_modules npm-shrinkwrap.json templates
