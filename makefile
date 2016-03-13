@@ -55,6 +55,6 @@ report:
 # Tear Down
 
 clean:
-	< .gitignore xargs rm -rf
+	< .gitignore xargs -I% sh -c "rm -rf %"
 
 .PHONY: test
