@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt');
 var Q = require('q');
 
-var credentialCodec = require('./credentialCodec.js');
+var credentialCodec = require('./authenticate/credentialCodec.js');
 var db = require('./db.js');
 var AuthenticationError = require('./errors.js').AuthenticationError;
 var genId = require('./genId.js');
