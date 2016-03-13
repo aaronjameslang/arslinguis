@@ -1,0 +1,20 @@
+Seperate html server from api server but still serve over same url paths!
+
+Database
+
+BaseApp
+  Auth, Logic, Serves Json
+
+Formatters
+  XML, YAML, HTML*
+  Get data from base app
+
+HTML App
+  Serves html/css/js
+  Gets data from baseapp
+
+Facade
+  Takes incoming requests, decides where to forward it
+
+Front end (if js enabled)
+  Similar to HTML to app, get data via ajax
