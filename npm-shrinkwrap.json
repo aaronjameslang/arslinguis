@@ -196,6 +196,11 @@
         }
       }
     },
+    "beeper": {
+      "version": "1.1.0",
+      "from": "beeper@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/beeper/-/beeper-1.1.0.tgz"
+    },
     "bindings": {
       "version": "1.2.1",
       "from": "bindings@1.2.1",
@@ -1044,9 +1049,9 @@
       "resolved": "https://registry.npmjs.org/jsesc/-/jsesc-0.5.0.tgz"
     },
     "jshint": {
-      "version": "2.9.1",
-      "from": "jshint@2.9.1",
-      "resolved": "https://registry.npmjs.org/jshint/-/jshint-2.9.1.tgz",
+      "version": "2.9.2",
+      "from": "jshint@2.9.2",
+      "resolved": "https://registry.npmjs.org/jshint/-/jshint-2.9.2.tgz",
       "dependencies": {
         "lodash": {
           "version": "3.7.0",
@@ -1056,9 +1061,9 @@
       }
     },
     "jshint-stylish": {
-      "version": "2.1.0",
-      "from": "jshint-stylish@2.1.0",
-      "resolved": "https://registry.npmjs.org/jshint-stylish/-/jshint-stylish-2.1.0.tgz"
+      "version": "2.2.0",
+      "from": "jshint-stylish@2.2.0",
+      "resolved": "https://registry.npmjs.org/jshint-stylish/-/jshint-stylish-2.2.0.tgz"
     },
     "json5": {
       "version": "0.4.0",
