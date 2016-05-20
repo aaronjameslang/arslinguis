@@ -73,7 +73,6 @@ function authenticate(request) {
   }
 
   var authorization = request.headers.authorization;
-  console.log('authorization: ', authorization);
   if (authorization) {
     return authenticateAuthorization(authorization);
   }

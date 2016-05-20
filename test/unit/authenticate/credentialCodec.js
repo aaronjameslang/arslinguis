@@ -43,7 +43,6 @@ function testEncode(b64, credential) {
 
 describe('credentialCodec', function() {
   fixtures.forEach(function(fixture) {
-    console.log(fixture);
     it(
       'should be able to encode ' + fixture.b64s[0],
       testEncode.bind(null, fixture.b64s[0], fixture)

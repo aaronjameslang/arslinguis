@@ -6,6 +6,7 @@ var fs = require('fs');
 
 var config = require('./config.js');
 var handleRequest = require('./libs/handleRequest.js');
+var logger = require('./libs/logger');
 
 process.title = 'arslinguis';
 
@@ -15,4 +16,4 @@ app.use(cookieParser());
 app.use(handleRequest);
 app.listen(config.bindTo);
 
-console.log('Bound to ' + config.bindTo);
+logger.logString('Bound to ' + config.bindTo);
