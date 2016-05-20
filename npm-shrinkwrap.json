@@ -185,9 +185,16 @@
       "resolved": "https://registry.npmjs.org/balanced-match/-/balanced-match-0.3.0.tgz"
     },
     "bcrypt": {
-      "version": "0.8.5",
-      "from": "bcrypt@0.8.5",
-      "resolved": "https://registry.npmjs.org/bcrypt/-/bcrypt-0.8.5.tgz"
+      "version": "0.8.6",
+      "from": "bcrypt@0.8.6",
+      "resolved": "https://registry.npmjs.org/bcrypt/-/bcrypt-0.8.6.tgz",
+      "dependencies": {
+        "nan": {
+          "version": "2.2.1",
+          "from": "nan@2.2.1",
+          "resolved": "https://registry.npmjs.org/nan/-/nan-2.2.1.tgz"
+        }
+      }
     },
     "bindings": {
       "version": "1.2.1",
@@ -225,6 +232,11 @@
           "resolved": "https://registry.npmjs.org/nan/-/nan-1.8.4.tgz"
         }
       }
+    },
+    "buffer-shims": {
+      "version": "1.0.0",
+      "from": "buffer-shims@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/buffer-shims/-/buffer-shims-1.0.0.tgz"
     },
     "camelcase": {
       "version": "1.2.1",
@@ -463,7 +475,8 @@
       "dependencies": {
         "esprima-fb": {
           "version": "15001.1001.0-dev-harmony-fb",
-          "from": "esprima-fb@>=15001.1001.0-dev-harmony-fb <15001.1002.0"
+          "from": "esprima-fb@>=15001.1001.0-dev-harmony-fb <15001.1002.0",
+          "resolved": "https://registry.npmjs.org/esprima-fb/-/esprima-fb-15001.1001.0-dev-harmony-fb.tgz"
         },
         "window-size": {
           "version": "0.1.4",
@@ -1299,9 +1312,16 @@
       "resolved": "https://registry.npmjs.org/mongodb/-/mongodb-1.4.40.tgz",
       "dependencies": {
         "readable-stream": {
-          "version": "2.0.5",
+          "version": "2.1.4",
           "from": "readable-stream@latest",
-          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.0.5.tgz"
+          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.1.4.tgz",
+          "dependencies": {
+            "isarray": {
+              "version": "1.0.0",
+              "from": "isarray@>=1.0.0 <1.1.0",
+              "resolved": "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz"
+            }
+          }
         }
       }
     },
@@ -1314,11 +1334,6 @@
       "version": "0.0.6",
       "from": "mute-stream@>=0.0.4 <0.1.0",
       "resolved": "https://registry.npmjs.org/mute-stream/-/mute-stream-0.0.6.tgz"
-    },
-    "nan": {
-      "version": "2.0.5",
-      "from": "nan@2.0.5",
-      "resolved": "https://registry.npmjs.org/nan/-/nan-2.0.5.tgz"
     },
     "natural-compare": {
       "version": "1.2.2",
@@ -1555,7 +1570,8 @@
       "dependencies": {
         "esprima-fb": {
           "version": "15001.1001.0-dev-harmony-fb",
-          "from": "esprima-fb@>=15001.1001.0-dev-harmony-fb <15001.1002.0"
+          "from": "esprima-fb@15001.1001.0-dev-harmony-fb",
+          "resolved": "https://registry.npmjs.org/esprima-fb/-/esprima-fb-15001.1001.0-dev-harmony-fb.tgz"
         },
         "source-map": {
           "version": "0.5.3",
