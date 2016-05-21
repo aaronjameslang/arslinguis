@@ -1,0 +1,11 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "chai": true,
+    "dbfixtures": true,
+    "dispatch": true,
+    "expect": true
+  }
+}
