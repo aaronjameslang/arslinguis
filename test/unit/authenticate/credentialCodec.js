@@ -1,6 +1,3 @@
-var chai = require('chai')
-var expect = chai.expect
-
 var credentialCodec = require('../../../libs/authenticate/credentialCodec.js')
 
 var fixtures = [
