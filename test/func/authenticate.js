@@ -1,6 +1,5 @@
 var chai = require('chai')
 var expect = chai.expect
-var http = require('http')
 
 var authenticate = require('../../libs/authenticate.js')
 

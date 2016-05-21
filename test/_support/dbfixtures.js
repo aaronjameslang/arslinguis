@@ -1,5 +1,6 @@
 var execSync = require('child_process').execSync
 var fs = require('fs')
+var path = require('path')
 
 module.exports = {
   drop: drop,
@@ -8,7 +9,7 @@ module.exports = {
 }
 
 var filepaths
-var dirpath = __dirname + '/../_data'
+var dirpath = path.join(__dirname, '/../_data')
 
 function set () {
   if (!arguments.length) {

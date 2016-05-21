@@ -9,7 +9,7 @@ var logger = require('./logger.js')
 module.exports = handleRequest
 
 function handleRequest (request, response) {
-  var session
+  // var session
   Q()
     .then(function () {
       logger.logRequest(request)
@@ -17,8 +17,8 @@ function handleRequest (request, response) {
     .then(function () {
       return authenticate(request)
     })
-    .then(function (session_) {
-      session = session_
+    .then(function (/* session_*/) {
+      // session = session_
       var urlPath = liburl.parse(request.url, true).path
       var criteria = getCriteria(urlPath)
       var methodName = criteria.id ? 'findOne' : 'find'

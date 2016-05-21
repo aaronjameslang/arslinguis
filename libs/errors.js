@@ -1,5 +1,3 @@
-var db = require('./db.js')
-
 exports.ArslinguisError = ArslinguisError
 exports.AuthenticationError = AuthenticationError
 exports.ContentNegotiationError = ContentNegotiationError

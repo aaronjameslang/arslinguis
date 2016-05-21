@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: "off"*/
 require('../../server.js')
 
 chai = require('chai')

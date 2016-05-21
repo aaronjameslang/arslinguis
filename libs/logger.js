@@ -28,7 +28,7 @@ function respondWithError (error, response) {
   response.statusCode = 500
   if (error instanceof ArslinguisError && error.code) {
     response.statusCode = error.code
-    respose.statusMessage = error.message
+    response.statusMessage = error.message
   }
   response.write(response.statusCode + ': ' + response.statusMessage)
   return Q.ninvoke(response, 'end')

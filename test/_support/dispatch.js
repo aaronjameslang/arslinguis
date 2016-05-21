@@ -47,7 +47,7 @@ function testResponse (done, expectedResponse, response) {
 
   if (!(testBody instanceof Function)) {
     var expectedBody = testBody
-    testBody = function (actualBody, chai) {
+    testBody = function (actualBody) {
       expect(actualBody).to.equal(expectedBody)
     }
   }
@@ -57,7 +57,7 @@ function testResponse (done, expectedResponse, response) {
       done(error)
       return
     }
-    testBody(actualBody, chai)
+    testBody(actualBody)
     done()
   })
 }
