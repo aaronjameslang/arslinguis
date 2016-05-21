@@ -1,60 +1,61 @@
-var execSync = require('child_process').execSync;
-var fs = require('fs');
+var execSync = require('child_process').execSync
+var fs = require('fs')
+var path = require('path')
 
 module.exports = {
   drop: drop,
   load: load,
-  set: set,
-};
+  set: set
+}
 
-var filepaths;
-var dirpath = __dirname + '/../_data';
+var filepaths
+var dirpath = path.join(__dirname, '/../_data')
 
-function set() {
+function set () {
   if (!arguments.length) {
-    reset();
+    reset()
   }
 
-  filepaths = [];
-  Array.prototype.forEach.call(arguments, function(filename) {
-    var filepath = dirpath + '/' + filename + '.mongo';
-    filepaths.push(filepath);
-  });
+  filepaths = []
+  Array.prototype.forEach.call(arguments, function (filename) {
+    var filepath = dirpath + '/' + filename + '.mongo'
+    filepaths.push(filepath)
+  })
 }
 
-function reset() {
-  filepaths = [];
-  fs.readdirSync(dirpath).forEach(function(filename) {
-    var filepath = dirpath + '/' + filename;
-    filepaths.push(filepath);
-  });
+function reset () {
+  filepaths = []
+  fs.readdirSync(dirpath).forEach(function (filename) {
+    var filepath = dirpath + '/' + filename
+    filepaths.push(filepath)
+  })
 }
 
-function drop() {
+function drop () {
   var command =
-      'mongoimport --host=127.0.0.1 --db arslinguis ' +
-      '--collection main --drop /dev/null  &>> target/fixtures.log';
+  'mongoimport --host=127.0.0.1 --db arslinguis ' +
+    '--collection main --drop /dev/null  &>> log'
 
-  execSync(command);
+  execSync(command)
 }
 
-function load() {
+function load () {
   if (arguments.length) {
-    set.apply(null, arguments);
+    set.apply(null, arguments)
   }
 
-  drop();
+  drop()
 
   if (!filepaths) {
-    reset();
+    reset()
   }
-  filepaths.forEach(loadFixtureFile);
+  filepaths.forEach(loadFixtureFile)
 }
 
-function loadFixtureFile(filepath) {
+function loadFixtureFile (filepath) {
   var command =
-    'mongoimport --host=127.0.0.1 --db arslinguis --collection main ' +
-    filepath + ' &>> target/fixtures.log';
+  'mongoimport --host=127.0.0.1 --db arslinguis --collection main ' +
+    filepath + ' &>> log'
 
-  execSync(command);
+  execSync(command)
 }

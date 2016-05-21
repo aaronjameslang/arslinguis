@@ -5,13 +5,10 @@ include makefile.d/*
 # Run
 
 sniff:
-	jshint . \
-		--exclude-path=.gitignore \
-		--reporter=node_modules/jshint-stylish
-	jscs libs test *.js
+	eslint .
 
 format:
-	jscs libs test *.js --fix
+	eslint . --fix || true
 
 test:
 	mocha --recursive --colors --require test/_support/bootstrap.js
