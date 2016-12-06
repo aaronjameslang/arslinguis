@@ -12,7 +12,7 @@ let deferredCollection = null
 /**
  * @return {{}} mongodb collection promise
  */
-function getCollection() {
+function getCollection () {
   if (!deferredCollection) {
     deferredCollection = Q.defer()
     const mongodb = require('mongodb')
@@ -21,7 +21,7 @@ function getCollection() {
   return deferredCollection.promise
 }
 
-function connect(mongodb, deferredCollection) {
+function connect (mongodb, deferredCollection) {
   const url = 'mongodb://127.0.0.1/arslinguis'
   const collectionName = 'main'
   mongodb.MongoClient.connect(url, (error, database) => {

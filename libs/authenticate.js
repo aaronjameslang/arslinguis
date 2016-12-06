@@ -2,7 +2,7 @@ var bcrypt = require('bcrypt')
 var Q = require('q')
 
 var credentialCodec = require('./authenticate/credentialCodec.js')
-var db = require('./db.js')
+var repository = require('./repository')
 var AuthenticationError = require('./errors.js').AuthenticationError
 var genId = require('node-uuid').v4
 
@@ -12,7 +12,7 @@ var COOKIE_NAME = 'arslinguis-session-id'
 module.exports = authenticate
 
 function authenticateSession (sessionId) {
-  return db.findOne({id: sessionId, type: 'session'})
+  return repository.retrieveOne({id: sessionId, type: 'session'})
     .then(function (session) {
       if (!session) {
         throw new AuthenticationError('Unauthorised session ID: ' + sessionId)
@@ -40,7 +40,7 @@ function authenticateCredential (actualCredential) {
   }
   var session
   var expectedCredential
-  return db.findOne(criteria)
+  return repository.retrieveOne(criteria)
     .then(function (expectedCredential_) {
       expectedCredential = expectedCredential_
       if (!expectedCredential) {
@@ -54,12 +54,11 @@ function authenticateCredential (actualCredential) {
         throw new AuthenticationError('Unauthorised password')
       }
       session = {
-        id: genId(),
         type: 'session',
         userId: expectedCredential.userId,
         ctime: Date.now()
       }
-      return db.insert(session)
+      return repository.create(session)
     })
     .then(function () {
       return session

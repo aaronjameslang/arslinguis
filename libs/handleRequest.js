@@ -2,7 +2,7 @@ var Q = require('q')
 var liburl = require('url')
 
 var authenticate = require('./authenticate.js')
-var db = require('./db.js')
+var repository = require('./repository')
 var getCriteria = require('./getCriteria.js')
 var logger = require('./logger.js')
 
@@ -21,8 +21,8 @@ function handleRequest (request, response) {
       // session = session_
       var urlPath = liburl.parse(request.url, true).path
       var criteria = getCriteria(urlPath)
-      var methodName = criteria.id ? 'findOne' : 'find'
-      return db[methodName](criteria)
+      var methodName = criteria.id ? 'retrieveOne' : 'retrieveMany'
+      return repository[methodName](criteria)
     })
     .then(function (data) {
       response.setHeader('content-type', 'application/json')

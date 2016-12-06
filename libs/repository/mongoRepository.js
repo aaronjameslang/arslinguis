@@ -7,6 +7,14 @@
 const Q = require('q')
 const getCollection = require('./getMongoCollection')
 
+module.exports = {
+  create: create,
+  retrieveOne: retrieveOne,
+  retrieveMany: retrieveMany,
+  update: update,
+  remove: remove
+}
+
 function create (object) {
   object = mongoify(object)
   return getCollection()
@@ -15,7 +23,7 @@ function create (object) {
     })
 }
 
-function retrieve (criteria) {
+function retrieveOne (criteria) {
   criteria = mongoify(criteria) // this may not need cloning
   return getCollection()
     .then(function (collection) {
@@ -24,12 +32,32 @@ function retrieve (criteria) {
     .then(demongoify)
 }
 
+function retrieveMany (criteria) {
+  criteria = mongoify(criteria)
+  return getCollection()
+     .then(function (collection) {
+       return Q.npost(collection, 'find', [criteria])
+     })
+     .then(function (cursor) {
+       return Q.npost(cursor, 'toArray')
+     })
+     .then(demongoify)
+}
+
+function update () {
+  throw new Error
+}
+
+function remove () {
+  throw new Error
+}
+
 /**
  * Shift `id` to `_id` for objects going into the database
  * Clone first to prevent mutating input objects
  * @param object
  */
-function mongoify(object) {
+function mongoify (object) {
   // if (Array.isArray(object)) {
   //   return object.map(this.mongoify.bind(this))
   // }
@@ -62,30 +90,3 @@ function clone (object) {
   }
   return clone
 }
-
-// db.findOne = function () {
-//   var args = arguments
-//   args[0] = this.mongoify(args[0])
-//   return this.unwrap()
-//     .then(function (collection) {
-//       return Q.npost(collection, 'findOne', args)
-//     })
-//     .then(function (document) {
-//       return this.demongoify(document)
-//     }.bind(this))
-// }
-//
-// db.find = function () {
-//   var args = arguments
-//   args[0] = this.mongoify(args[0])
-//   return this.unwrap()
-//     .then(function (collection) {
-//       return Q.npost(collection, 'find', args)
-//     })
-//     .then(function (cursor) {
-//       return Q.npost(cursor, 'toArray')
-//     })
-//     .then(function (documents) {
-//       return this.demongoify(documents)
-//     }.bind(this))
-// }
