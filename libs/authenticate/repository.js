@@ -1,4 +1,5 @@
-var db = require('./db.js')
+const db = require('../db.js')
+const genId = require('node-uuid').v4
 
 module.exports = {
   getCredential: getCredential,
@@ -8,7 +9,7 @@ module.exports = {
 
 function getCredential (username, domain) {
   if (!username || 'string' !== typeof username) {
-    throw new Error;
+    throw new Error
   }
   const criteria = {
     type: 'credential',
@@ -17,7 +18,7 @@ function getCredential (username, domain) {
   if (domain) {
     criteria.domain = domain
   }
-  return db.findOne(criteria);
+  return db.findOne(criteria)
 }
 
 function getSessionById (sessionId) {
@@ -27,10 +28,10 @@ function getSessionById (sessionId) {
 function createSession (userId) {
   const session = {
     id: genId(),
-      type: 'session',
-      userId: userId,
-      ctime: Date.now()
+    type: 'session',
+    userId: userId,
+    ctime: Date.now()
   }
   return db.insert(session)
-    .then(session)
+    .then(() => session)
 }
