@@ -41,6 +41,14 @@ describe('authenticate', function () {
       })
 
     it(
+      'should return null if no getSessionById', () => {
+        return repository.getSessionById('invalid-id')
+          .then(session => {
+            expect(session).to.equal(null)
+          })
+      })
+
+    it(
       'should createSession', () => {
         let session = null
         return repository.createSession('6694b1dd-26d6-48c2-b9fc-953038686502')
