@@ -14,6 +14,7 @@ function getSessionId (request) {
 
 function getCredential (request) {
   const authorization = request.headers.authorization
+  if (!authorization) return authorization
   const authorizationType = authorization.split(' ')[0]
   if (authorizationType.toLowerCase() !== 'basic') {
     const message = 'Unrecognised authorization type: ' + authorizationType
