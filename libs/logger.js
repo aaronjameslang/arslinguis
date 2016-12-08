@@ -36,7 +36,7 @@ function respondWithError (error, response) {
 
 function logString (message) {
   message = new Date() + ' ' + message + '\n'
-  fs.appendFile('log', message, function (error) {
+  fs.appendFile('app.log', message, function (error) {
     if (error) {
       console.log('Error when logging: ', error)
     }

@@ -34,7 +34,7 @@ function reset () {
 function drop () {
   var command =
   'mongoimport --host=127.0.0.1 --db arslinguis ' +
-    '--collection main --drop /dev/null  &>> log'
+    '--collection main --drop /dev/null  &>> mongo.log'
 
   execSync(command)
 }
@@ -55,7 +55,7 @@ function load () {
 function loadFixtureFile (filepath) {
   var command =
   'mongoimport --host=127.0.0.1 --db arslinguis --collection main ' +
-    filepath + ' &>> log'
+    filepath + ' &>> mongo.log'
 
   execSync(command)
 }
