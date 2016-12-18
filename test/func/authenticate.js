@@ -44,4 +44,17 @@ describe('authenticate', function () {
         expect(session.id).to.equal(sessionId)
       })
   })
+  it('should recognise Sam\'s session', function () {
+    const sessionId = '40046187-b533-4d15-93c7-d5f25362f7fa'
+    const userId = 'd0bc1cb3-87c2-4d9c-9dde-6a02b40e1ebe'
+    var request = new Request()
+    request.cookies = {'arslinguis-session-id': sessionId}
+    return authenticate(request)
+      .then(function (session) {
+        expect(session).to.be.an('object')
+        expect(session.type).to.equal('session')
+        expect(session.userId).to.equal(userId)
+        expect(session.id).to.equal(sessionId)
+      })
+  })
 })
