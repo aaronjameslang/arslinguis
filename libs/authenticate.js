@@ -57,5 +57,3 @@ function authenticateCredential (suppliedCredential) {
       return repository.createSession(userId)
     })
 }
-
-

@@ -9,7 +9,7 @@ module.exports = {
 
 function getCredential (username, domain) {
   if (!username || 'string' !== typeof username) {
-    throw new Error
+    throw new Error()
   }
   const criteria = {
     type: 'credential',
