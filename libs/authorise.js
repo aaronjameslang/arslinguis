@@ -14,8 +14,8 @@ function authorise (type, method, userId) {
   let delegate = delegates[type][method]
   let authorised = delegate(userId)
   if (authorised) return
-  if (userId) throw new AuthorisationError()
-  throw new AuthenticationError()
+  if (userId) throw new AuthorisationError('Permission denied')
+  throw new AuthenticationError('Permission denied, try logging in')
 }
 
 function allow () {

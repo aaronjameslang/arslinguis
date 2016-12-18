@@ -11,7 +11,7 @@ describe('GET /language JSON', function () {
     var response = {
       statusCode: 401,
       headers: {},
-      _body: '401: '
+      _body: '401: Permission denied, try logging in'
     }
     dispatch(done, request, response)
   })
