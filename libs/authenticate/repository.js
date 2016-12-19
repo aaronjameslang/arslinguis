@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function getCredential (username, domain) {
-  if (!username || 'string' !== typeof username) {
+  if (!username || typeof username !== 'string') {
     throw new Error()
   }
   const criteria = {

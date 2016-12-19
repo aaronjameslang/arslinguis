@@ -5,7 +5,6 @@ chai.use(require('chai-properties'))
 const authorise = require('../../libs/authorise')
 
 const AuthenticationError = require('../../libs/errors.js').AuthenticationError
-const AuthorisationError = require('../../libs/errors.js').AuthorisationError
 const NotFoundError = require('../../libs/errors.js').NotFoundError
 
 const fixtures = [

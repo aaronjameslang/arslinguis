@@ -22,10 +22,6 @@ function allow () {
   return true
 }
 
-function deny () {
-  return false
-}
-
 function requireLogin (userId) {
   return !!userId
 }

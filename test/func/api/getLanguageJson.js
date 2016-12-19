@@ -39,5 +39,4 @@ describe('GET /language JSON', function () {
     }
     dispatch(done, request, response)
   })
-
 })

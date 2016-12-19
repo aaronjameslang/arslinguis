@@ -10,7 +10,6 @@ const db = require('../../../libs/db')
 
 describe('authenticate', function () {
   describe('repository', function () {
-
     before(dbfixtures.load)
 
     it(
@@ -64,6 +63,5 @@ describe('authenticate', function () {
             expect(session_).to.have.properties(session)
           })
       })
-
   })
 })
