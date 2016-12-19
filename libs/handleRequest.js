@@ -10,20 +10,15 @@ var logger = require('./logger.js')
 module.exports = handleRequest
 
 function handleRequest (request, response) {
-  // var session
   var urlPath = liburl.parse(request.url, true).path
   var criteria = getCriteria(urlPath)
   Q()
     .then(function () {
       logger.logRequest(request)
     })
-    .then(function () {
-      return authenticate(request)
-    })
-    .then(function (session_) {
-      // session = session_
-      var userId = session_ ? session_.userId : null
-      authorise(criteria.type, request.method, userId)
+    .then(() => authenticate(request))
+    .then(session => {
+      authorise(criteria.type, request.method, session.userId)
     }).then(function () {
       var urlPath = liburl.parse(request.url, true).path
       var criteria = getCriteria(urlPath)

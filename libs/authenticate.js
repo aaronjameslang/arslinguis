@@ -22,7 +22,7 @@ function authenticate (request) {
     return authenticateCredential(credential)
   }
 
-  return Q(null)
+  return Q({})
 }
 
 /**
