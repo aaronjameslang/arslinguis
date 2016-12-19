@@ -1,15 +1,16 @@
-var AuthenticationError = require('./errors.js').AuthenticationError
-var AuthorisationError = require('./errors.js').AuthorisationError
-var NotFoundError = require('./errors.js').NotFoundError
+const AuthenticationError = require('./errors.js').AuthenticationError
+const AuthorisationError = require('./errors.js').AuthorisationError
+const NotFoundError = require('./errors.js').NotFoundError
+const MethodNotAllowedError = require('./errors.js').MethodNotAllowedError
 
 module.exports = authorise
 
 function authorise (type, method, userId) {
   if (!delegates[type]) {
-    throw new NotFoundError('Unrecognised type: ' + type) // No an auth error
+    throw new NotFoundError('Unrecognised type: ' + type) // Not an auth error
   }
   if (!delegates[type][method]) {
-    throw new NotFoundError('Unrecognised action: ' + method) // No an auth error
+    throw new MethodNotAllowedError('Unrecognised action: ' + method) // Not an auth error
   }
   let delegate = delegates[type][method]
   let authorised = delegate(userId)

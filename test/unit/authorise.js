@@ -6,6 +6,7 @@ const authorise = require('../../libs/authorise')
 
 const AuthenticationError = require('../../libs/errors.js').AuthenticationError
 const NotFoundError = require('../../libs/errors.js').NotFoundError
+const MethodNotAllowedError = require('../../libs/errors.js').MethodNotAllowedError
 
 const fixtures = [
   {
@@ -15,7 +16,7 @@ const fixtures = [
   }, {
     type: 'user',
     method: 'SET',
-    error: NotFoundError
+    error: MethodNotAllowedError
   }, {
     type: 'user',
     method: 'GET'

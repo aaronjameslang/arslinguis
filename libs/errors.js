@@ -2,6 +2,7 @@ exports.ArslinguisError = ArslinguisError
 exports.AuthenticationError = AuthenticationError
 exports.AuthorisationError = AuthorisationError
 exports.NotFoundError = NotFoundError
+exports.MethodNotAllowedError = MethodNotAllowedError
 exports.ContentNegotiationError = ContentNegotiationError
 
 function ArslinguisError () {
@@ -37,6 +38,14 @@ NotFoundError.prototype = Object.create(ArslinguisError.prototype)
 NotFoundError.prototype.constructor = NotFoundError
 NotFoundError.prototype.name = 'NotFoundError'
 NotFoundError.prototype.code = 404
+
+function MethodNotAllowedError () {
+  ArslinguisError.apply(this, arguments)
+}
+NotFoundError.prototype = Object.create(ArslinguisError.prototype)
+NotFoundError.prototype.constructor = MethodNotAllowedError
+NotFoundError.prototype.name = 'MethodNotAllowedError'
+NotFoundError.prototype.code = 405
 
 function ContentNegotiationError () {
   ArslinguisError.apply(this, arguments)
