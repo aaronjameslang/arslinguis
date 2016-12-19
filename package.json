@@ -5,7 +5,8 @@
   "bin": "./server.js",
   "author": "aaronjameslang@googlemail.com",
   "scripts": {
-    "stop": "kill $(cat pid) || killall arslinguis"
+    "stop": "kill $(cat pid) || killall arslinguis",
+    "update": "npm update && npm shrinkwrap --dev && npm outdated"
   },
   "dependencies": {
     "bcrypt": "^0.8.6",
