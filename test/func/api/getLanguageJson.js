@@ -20,7 +20,7 @@ describe('GET /language JSON', function () {
     var request = {
       path: '/language/d02e2092-0fb5-4d26-98a0-bfe879d379f8',
       headers: {
-        cookies: 'arslinguis-session-id=40046187-b533-4d15-93c7-d5f25362f7fa'
+        cookie: 'arslinguis-session-id=40046187-b533-4d15-93c7-d5f25362f7fa'
       }
     }
     var response = {
