@@ -1,18 +1,36 @@
-var bcrypt = require('bcrypt')
-var Q = require('q')
-
-var credentialCodec = require('./authenticate/credentialCodec.js')
-var db = require('./db.js')
-var AuthenticationError = require('./errors.js').AuthenticationError
-var genId = require('node-uuid').v4
-
-var hash = Q.nbind(bcrypt.hash, bcrypt)
-var COOKIE_NAME = 'arslinguis-session-id'
+const Q = require('q')
+const AuthenticationError = require('./errors.js').AuthenticationError
+const assertPasswordIsCorrect = require('./authenticate/assertPasswordIsCorrect')
+const repository = require('./authenticate/repository')
+const requestParser = require('./authenticate/requestParser')
 
 module.exports = authenticate
 
+/**
+ * Middleware
+ * @param request
+ * @return {Promise.<{sessionId, userId}>}
+ */
+function authenticate (request) {
+  const sessionId = requestParser.getSessionId(request)
+  if (sessionId) {
+    return authenticateSession(sessionId)
+  }
+
+  const credential = requestParser.getCredential(request)
+  if (credential) {
+    return authenticateCredential(credential)
+  }
+
+  return Q({})
+}
+
+/**
+ * @param sessionId
+ * @return {Promise.<Session>}
+ */
 function authenticateSession (sessionId) {
-  return db.findOne({id: sessionId, type: 'session'})
+  return repository.getSessionById(sessionId)
     .then(function (session) {
       if (!session) {
         throw new AuthenticationError('Unauthorised session ID: ' + sessionId)
@@ -21,61 +39,21 @@ function authenticateSession (sessionId) {
     })
 }
 
-function authenticateAuthorization (authorization) {
-  var authorizationType = authorization.split(' ')[0]
-  if (authorizationType.toLowerCase() !== 'basic') {
-    var message = 'Unauthorised authorization type: ' + authorizationType
-    var error = new AuthenticationError(message)
-    return Q.reject(error)
-  }
-  var b64 = authorization.split(' ')[1]
-  var credential = credentialCodec.decode(b64)
-  return authenticateCredential(credential)
-}
-
-function authenticateCredential (actualCredential) {
-  var criteria = {username: actualCredential.username}
-  if (actualCredential.domain) {
-    criteria.domain = actualCredential.domain
-  }
-  var session
-  var expectedCredential
-  return db.findOne(criteria)
-    .then(function (expectedCredential_) {
-      expectedCredential = expectedCredential_
-      if (!expectedCredential) {
-        var message = 'Unauthorised username: ' + actualCredential.username
+/**
+ * @param suppliedCredential
+ * @return {Promise.<Session>}
+ */
+function authenticateCredential (suppliedCredential) {
+  let userId
+  return repository.getCredential(suppliedCredential.username)
+    .then(function (storedCredential) {
+      userId = storedCredential.userId
+      if (!storedCredential) {
+        const message = 'Unknown username: ' + suppliedCredential.username
         throw new AuthenticationError(message)
       }
-      return hash(actualCredential.password, expectedCredential.hashcode)
+      return assertPasswordIsCorrect(suppliedCredential.password, storedCredential.hashcode)
+    }).then(() => {
+      return repository.createSession(userId)
     })
-    .then(function (actualHashcode) {
-      if (actualHashcode !== expectedCredential.hashcode) {
-        throw new AuthenticationError('Unauthorised password')
-      }
-      session = {
-        id: genId(),
-        type: 'session',
-        userId: expectedCredential.userId,
-        ctime: Date.now()
-      }
-      return db.insert(session)
-    })
-    .then(function () {
-      return session
-    })
-}
-
-function authenticate (request) {
-  var sessionId = request.cookies[COOKIE_NAME]
-  if (sessionId) {
-    return authenticateSession(sessionId)
-  }
-
-  var authorization = request.headers.authorization
-  if (authorization) {
-    return authenticateAuthorization(authorization)
-  }
-
-  return Q(null)
 }

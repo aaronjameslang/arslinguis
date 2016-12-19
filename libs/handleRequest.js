@@ -2,6 +2,7 @@ var Q = require('q')
 var liburl = require('url')
 
 var authenticate = require('./authenticate.js')
+var authorise = require('./authorise')
 var db = require('./db.js')
 var getCriteria = require('./getCriteria.js')
 var logger = require('./logger.js')
@@ -9,19 +10,17 @@ var logger = require('./logger.js')
 module.exports = handleRequest
 
 function handleRequest (request, response) {
-  // var session
+  const urlPath = liburl.parse(request.url, true).path
+  const criteria = getCriteria(urlPath)
   Q()
     .then(function () {
       logger.logRequest(request)
     })
-    .then(function () {
-      return authenticate(request)
-    })
-    .then(function (/* session_*/) {
-      // session = session_
-      var urlPath = liburl.parse(request.url, true).path
-      var criteria = getCriteria(urlPath)
-      var methodName = criteria.id ? 'findOne' : 'find'
+    .then(() => authenticate(request))
+    .then(session => {
+      authorise(criteria.type, request.method, session.userId)
+    }).then(function () {
+      const methodName = criteria.id ? 'findOne' : 'find'
       return db[methodName](criteria)
     })
     .then(function (data) {
