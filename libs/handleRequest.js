@@ -10,8 +10,8 @@ var logger = require('./logger.js')
 module.exports = handleRequest
 
 function handleRequest (request, response) {
-  var urlPath = liburl.parse(request.url, true).path
-  var criteria = getCriteria(urlPath)
+  const urlPath = liburl.parse(request.url, true).path
+  const criteria = getCriteria(urlPath)
   Q()
     .then(function () {
       logger.logRequest(request)
@@ -20,9 +20,7 @@ function handleRequest (request, response) {
     .then(session => {
       authorise(criteria.type, request.method, session.userId)
     }).then(function () {
-      var urlPath = liburl.parse(request.url, true).path
-      var criteria = getCriteria(urlPath)
-      var methodName = criteria.id ? 'findOne' : 'find'
+      const methodName = criteria.id ? 'findOne' : 'find'
       return db[methodName](criteria)
     })
     .then(function (data) {
