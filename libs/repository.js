@@ -1,4 +1,3 @@
-const Q = require('q')
 const generateId = require('node-uuid').v4
 const mongoRepository = require('./repository/mongoRepository')
 module.exports = {
@@ -10,7 +9,7 @@ module.exports = {
 }
 
 function create (object) {
-  if (object.id) throw new Error
+  if (object.id) throw new Error()
   object.id = generateId()
   return mongoRepository.create(object)
 }

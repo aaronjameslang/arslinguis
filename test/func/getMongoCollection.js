@@ -9,12 +9,12 @@ describe('getMongoCollection', function () {
       expect(collection).to.be.an('object')
     })
   })
-  it('should respond with a document', function () {
+  it('should respond with a record', function () {
     return getCollection()
       .then(collection => collection.findOne({}))
-      .then(function (document) {
-        expect(document).to.be.an('object')
-        expect(document._id).to.be.a('string')
+      .then(function (record) {
+        expect(record).to.be.an('object')
+        expect(record._id).to.be.a('string')
       })
   })
 })

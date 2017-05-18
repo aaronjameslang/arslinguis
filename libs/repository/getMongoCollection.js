@@ -2,6 +2,8 @@
  * This module handles connecting to mongo
  */
 
+const Q = require('q')
+
 module.exports = getCollection
 module.exports.private = {
   connect: connect

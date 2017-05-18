@@ -21,6 +21,12 @@ function create (object) {
     .then(function (collection) {
       return Q.npost(collection, 'insert', [object])
     })
+    .then(x => {
+      // Can't find docs for this callback
+      // assert x.insertedCount === 1
+      // assert array length == 1 ?
+      return x.insertedIds[0]
+    })
 }
 
 function retrieveOne (criteria) {
@@ -45,11 +51,11 @@ function retrieveMany (criteria) {
 }
 
 function update () {
-  throw new Error
+  throw new Error()
 }
 
 function remove () {
-  throw new Error
+  throw new Error()
 }
 
 /**
@@ -62,10 +68,11 @@ function mongoify (object) {
   //   return object.map(this.mongoify.bind(this))
   // }
 
-  const clone = clone(object)
-  clone._id = object.id
-  delete clone.id
-  return clone
+  if (!object.id) return object
+  const clone_ = clone(object)
+  clone_._id = object.id
+  delete clone_.id
+  return clone_
 }
 
 /**
@@ -77,6 +84,8 @@ function demongoify (object) {
   // if (Array.isArray(object)) {
   //   return object.map(this.demongoify.bind(this))
   // }
+
+  if (!object) return object
 
   object.id = object._id
   delete object._id
