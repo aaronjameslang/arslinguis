@@ -4,7 +4,6 @@ var Q = require('q')
 var credentialCodec = require('./authenticate/credentialCodec.js')
 var repository = require('./repository')
 var AuthenticationError = require('./errors.js').AuthenticationError
-var genId = require('node-uuid').v4
 
 var hash = Q.nbind(bcrypt.hash, bcrypt)
 var COOKIE_NAME = 'arslinguis-session-id'
