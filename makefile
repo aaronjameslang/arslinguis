@@ -13,6 +13,9 @@ format:
 test:
 	mocha --recursive --colors --require test/_support/bootstrap.js
 
+debug:
+	mocha --inspect --debug-brk --recursive --colors --require test/_support/bootstrap.js
+
 # CI
 
 report:
