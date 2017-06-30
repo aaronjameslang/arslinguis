@@ -24,9 +24,19 @@ function handleRequest (request, response) {
       return repository[methodName](criteria)
     })
     .then(function (data) {
-      response.setHeader('content-type', 'application/json')
-      var json = JSON.stringify(data)
-      response.write(json)
+      switch (request.accepts('html', 'json')) {
+        case 'html':
+          response.setHeader('content-type', 'text/html')
+          const html = '<html/>' // rectify app data
+          response.write(html)
+          break
+        case 'json':
+          response.setHeader('content-type', 'application/json')
+          var json = JSON.stringify(data)
+          response.write(json)
+          break
+        default: throw new Error() // TODO 406
+      }
     })
     .catch(function (error) {
       return Q.all(
