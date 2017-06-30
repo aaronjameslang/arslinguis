@@ -9,23 +9,24 @@ module.exports.private = {
   connect: connect
 }
 
-let deferredCollection = null
+const deferredCollections = []
 
 /**
  * @return {{}} mongodb collection promise
  */
-function getCollection () {
-  if (!deferredCollection) {
-    deferredCollection = Q.defer()
+function getCollection (collectionName) {
+  collectionName = collectionName || 'main'
+  if (!deferredCollections[collectionName]) {
+    const deferredCollection = Q.defer()
+    deferredCollections[collectionName] = deferredCollection
     const mongodb = require('mongodb')
-    connect(mongodb, deferredCollection)
+    connect(collectionName, mongodb, deferredCollection)
   }
-  return deferredCollection.promise
+  return deferredCollections[collectionName].promise
 }
 
-function connect (mongodb, deferredCollection) {
+function connect (collectionName, mongodb, deferredCollection) {
   const url = 'mongodb://127.0.0.1/arslinguis'
-  const collectionName = 'main'
   mongodb.MongoClient.connect(url, (error, database) => {
     if (error) {
       deferredCollection.reject(error)

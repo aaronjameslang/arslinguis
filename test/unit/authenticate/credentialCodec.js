@@ -1,3 +1,5 @@
+const chai = require('chai')
+const expect = chai.expect
 var credentialCodec = require('../../../libs/authenticate/credentialCodec.js')
 
 var fixtures = [
@@ -23,6 +25,15 @@ var fixtures = [
     domain: 'd:/?',
     username: 'dave?!/;:/',
     password: '//::123'
+  }, {
+    b64s: ['YWxiaW9uL2RhdmU6c3dvcmRmaXNo'],
+    domain: 'albion',
+    username: 'dave',
+    password: 'swordfish'
+  }, {
+    b64s: ['cm9iOmNoYW5nZW1l'],
+    username: 'rob',
+    password: 'changeme'
   }
 ]
 

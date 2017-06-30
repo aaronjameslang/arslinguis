@@ -1,8 +1,7 @@
 var _ = require('lodash')
-var pmongo = require('promised-mongo')
-var Q = require('q')
+const Q = require('q')
 
-var db = pmongo('mongodb://127.0.0.1/arslinguis')
+const getCollection = require('./repository/getMongoCollection')
 var fs = require('fs')
 var errors = require('./errors.js')
 var ArslinguisError = errors.ArslinguisError
@@ -15,9 +14,9 @@ exports.respondWithError = respondWithError
 function logError (error) {
   logString(error + '\n' + error.stack)
 
-  var dbCollection = db.collection('errorLogs')
-  var document = _.pick('name', 'message', 'stack', 'code')
-  return dbCollection.insert(document)
+  const errorDoc = _.pick(error, 'name', 'message', 'stack', 'code')
+  return getCollection('errorLogs')
+  .then(collection => Q.npost(collection, 'insert', [errorDoc]))
 }
 
 function logRequest (request) {
@@ -36,7 +35,7 @@ function respondWithError (error, response) {
 
 function logString (message) {
   message = new Date() + ' ' + message + '\n'
-  fs.appendFile('log', message, function (error) {
+  fs.appendFile('app.log', message, function (error) {
     if (error) {
       console.log('Error when logging: ', error)
     }

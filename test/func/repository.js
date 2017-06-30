@@ -20,6 +20,14 @@ describe('repository', function () {
         expect(record.type).to.equal('user')
       })
   })
+  it('should retrieve with user a0eb Annis', function () {
+    return repository.retrieveOne({id: 'a0ebf328-0c73-4f22-8930-e013c17d3c2a', type: 'user'})
+      .then(record => {
+        expect(record).to.be.an('object')
+        expect(record.type).to.equal('user')
+        expect(record.names[0]).to.equal('William Annis')
+      })
+  })
   it('should respond with a language', function () {
     return repository.retrieveMany({type: 'language'})
       .then(records => {
