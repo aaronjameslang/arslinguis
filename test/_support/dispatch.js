@@ -1,3 +1,7 @@
+const chai = require('chai')
+const expect = chai.expect
+chai.use(require('chai-properties'))
+
 var http = require('http')
 var deepmerge = require('deepmerge')
 

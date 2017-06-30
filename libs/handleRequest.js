@@ -2,8 +2,8 @@ var Q = require('q')
 var liburl = require('url')
 
 var authenticate = require('./authenticate.js')
+var repository = require('./repository')
 var authorise = require('./authorise')
-var db = require('./db.js')
 var getCriteria = require('./getCriteria.js')
 var logger = require('./logger.js')
 
@@ -20,8 +20,8 @@ function handleRequest (request, response) {
     .then(session => {
       authorise(criteria.type, request.method, session.userId)
     }).then(function () {
-      const methodName = criteria.id ? 'findOne' : 'find'
-      return db[methodName](criteria)
+      const methodName = criteria.id ? 'retrieveOne' : 'retrieveMany'
+      return repository[methodName](criteria)
     })
     .then(function (data) {
       response.setHeader('content-type', 'application/json')
