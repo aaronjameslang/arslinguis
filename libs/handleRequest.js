@@ -1,5 +1,7 @@
 var Q = require('q')
 var liburl = require('url')
+const React = require('react')
+const renderToString = require('react-dom/server').renderToString
 
 var authenticate = require('./authenticate.js')
 var repository = require('./repository')
@@ -28,7 +30,8 @@ function handleRequest (request, response) {
         case 'html':
           response.setHeader('content-type', 'text/html')
           const html = '<html/>' // rectify app data
-          response.write(html)
+          const markup = '' // renderToString(<app {data}/>)
+          response.render('common.ejs', {markup})
           break
         case 'json':
           response.setHeader('content-type', 'application/json')
