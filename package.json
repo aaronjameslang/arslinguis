@@ -6,7 +6,9 @@
   "author": "aaronjameslang@googlemail.com",
   "scripts": {
     "stop": "kill $(cat pid) || killall arslinguis",
-    "update": "npm update && npm shrinkwrap --dev && npm outdated"
+    "update": "npm update && npm shrinkwrap --dev && npm outdated",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "bcrypt": "^1",
@@ -15,7 +17,8 @@
     "lodash": "^4.12.0",
     "mongodb": "^2.1.19",
     "node-uuid": "^1.4.7",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -29,5 +32,6 @@
     "eslint-plugin-standard": "^2",
     "istanbul": "^0.4.3",
     "mocha": "^3.4.1"
-  }
+  },
+  "snyk": true
 }
