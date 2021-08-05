@@ -9,7 +9,7 @@
     "update": "npm update && npm shrinkwrap --dev && npm outdated"
   },
   "dependencies": {
-    "bcrypt": "^1",
+    "bcrypt": "^2.0.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "lodash": "^4.12.0",
